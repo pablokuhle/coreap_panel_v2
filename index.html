@@ -260,9 +260,9 @@
         <div class="section-desc">Mapa completo de procesos, sistemas, carga de trabajo y oportunidades de automatización. Seleccioná una coordinación para ver el detalle.</div>
       </div>
       <div class="stats-row">
-        <div class="stat-card"><div class="stat-card-label">Total etapas</div><div class="stat-card-val">38</div></div>
+        <div class="stat-card"><div class="stat-card-label">Total etapas</div><div class="stat-card-val">40</div></div>
         <div class="stat-card"><div class="stat-card-label">Plazos críticos</div><div class="stat-card-val danger">4</div></div>
-        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">19</div></div>
+        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">21</div></div>
         <div class="stat-card"><div class="stat-card-label">Sistemas en uso</div><div class="stat-card-val ok">11</div></div>
       </div>
       <div class="overview-grid">
@@ -285,9 +285,9 @@
           <div class="overview-arrow">Ver coordinación →</div>
         </div>
         <div class="overview-card" data-sec="rrhh">
-          <div class="overview-card-top"><div class="overview-card-name">📂 RRHH / Admin</div><div class="overview-card-count">3 personas · 7 etapas · 3 auto</div></div>
-          <div class="overview-card-desc">Expedientes SADE, altas y bajas, licencias, salario familiar y proyectos de resolución.</div>
-          <div class="overview-risks"><span class="risk-tag badge-warn">10 días reconsideración</span></div>
+          <div class="overview-card-top"><div class="overview-card-name">📂 RRHH / Admin</div><div class="overview-card-count">3 personas · 7 etapas · 5 auto</div></div>
+          <div class="overview-card-desc">15.540 expedientes 2022–2026. Excel como único registro histórico — SADE cierra el acceso al archivar.</div>
+          <div class="overview-risks"><span class="risk-tag badge-danger">35% registros sin clasificar</span><span class="risk-tag badge-warn">Tiempo promedio: 45,9 días</span></div>
           <div class="overview-arrow">Ver coordinación →</div>
         </div>
         <div class="overview-card" data-sec="cad">
@@ -489,27 +489,27 @@
       <div id="rrhh-sistemas" class="inner-panel">
         <div class="sistemas-grid">
           <div class="sistema-card">
-            <div class="sistema-name">SADE</div>
-            <div class="sistema-type">Sistema central de expedientes · Cerrado GCBA</div>
-            <div class="sistema-desc">Generación de EX, IF en GEDO, CCOO. Toda la tramitación formal de recursos, licencias y designaciones pasa por SADE.</div>
-            <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
-            <div class="sistema-problema">⚠️ No permite ver el estado de un expediente en tiempo real sin abrir cada uno manualmente.</div>
+            <div class="sistema-name">SADE — Expediente Electrónico</div>
+            <div class="sistema-type">Sistema central · Cerrado GCBA</div>
+            <div class="sistema-desc">Sistema donde ingresan, se tramitan y se giran los expedientes. Permite ver los expedientes del buzón propio y grupal. Una vez que un expediente se archiva o se gira a otro organismo, el equipo pierde el acceso y la visibilidad sobre él.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Buzón individual + Buzón Grupal</span></div>
+            <div class="sistema-problema">⚠️ Limitación crítica: SADE no permite ver históricos de expedientes cerrados ni filtrar por tipo, tiempo de resolución o analista. No genera reportes de gestión. Por eso existe el Excel — para compensar lo que SADE no da.</div>
             <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
           </div>
           <div class="sistema-card">
             <div class="sistema-name">Google Sheets (base de datos de expedientes)</div>
-            <div class="sistema-type">Seguimiento manual · Informal</div>
-            <div class="sistema-desc">Planilla compartida donde se registran los expedientes ingresados, estado y responsable. Usada como base de datos operativa.</div>
-            <div class="sistema-meta"><span class="sistema-acceso">👥 Acceso compartido</span></div>
-            <div class="sistema-problema">⚠️ Sin control de versiones: si alguien borra o sobreescribe una fila, la información se pierde sin posibilidad de recuperación inmediata. No tiene permisos granulares por usuario.</div>
-            <span class="sistema-badge sb-manual">Manual / riesgo de pérdida</span>
+            <div class="sistema-type">Único registro histórico del equipo · Riesgo alto</div>
+            <div class="sistema-desc">Planilla compartida con 24.969 registros. Es el único lugar donde queda información de expedientes ya cerrados en SADE. Tiene 13 hojas temáticas (Concursos, Disp/Reub/Ren, Adicional por título, etc.) más una vista total.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👥 Acceso compartido · sin permisos por usuario</span></div>
+            <div class="sistema-problema">⚠️ Si alguien borra una fila, esa información es irrecuperable — el expediente ya no está en SADE. El 35% de registros no tiene tema asignado. El campo ANALISTA está vacío en el 96% de los casos. Hay errores tipográficos en el campo ESTADO que rompen los filtros.</div>
+            <span class="sistema-badge sb-manual">Registro histórico único · sin validación</span>
           </div>
           <div class="sistema-card">
             <div class="sistema-name">WhatsApp</div>
             <div class="sistema-type">Coordinación con Junta · Sin trazabilidad</div>
-            <div class="sistema-desc">Canal informal usado para consultar a la Junta de Clasificación sobre expedientes en análisis. No queda registro formal de las respuestas obtenidas.</div>
-            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad</span></div>
-            <div class="sistema-problema">⚠️ Las respuestas de la Junta por WhatsApp no son un instrumento válido. Si hay un conflicto posterior, no hay evidencia del intercambio.</div>
+            <div class="sistema-desc">Canal informal usado para consultar a la Junta de Clasificación durante el análisis de expedientes. Las respuestas obtenidas no quedan registradas en ningún sistema formal.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad · personal</span></div>
+            <div class="sistema-problema">⚠️ Las respuestas de la Junta por WhatsApp no son instrumento válido. Si hay un conflicto posterior sobre la resolución de un expediente, no hay evidencia del intercambio. Google Chat (disponible en el GCBA con cuentas @bue.edu.ar) resuelve esto sin costo adicional.</div>
             <span class="sistema-badge sb-manual">Informal / sin registro</span>
           </div>
           <div class="sistema-card">
@@ -517,46 +517,67 @@
             <div class="sistema-type">Control de presentismo · Cerrado GCBA</div>
             <div class="sistema-desc">Carga de Comisiones de Servicios, control de fichadas y distribución de horarios.</div>
             <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
-            <div class="sistema-problema">⚠️ Fallas en el sistema generan tickets y expedientes adicionales que recaen sobre RRHH.</div>
+            <div class="sistema-problema">⚠️ Fallas en el sistema generan tickets y expedientes adicionales que recaen sobre RRHH sumando carga extra.</div>
             <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
           </div>
           <div class="sistema-card">
             <div class="sistema-name">MIA</div>
             <div class="sistema-type">Gestión de licencias · Cerrado GCBA</div>
-            <div class="sistema-desc">Aplicativo para carga y control de licencias docentes. Fallas frecuentes generan expedientes adicionales en SADE.</div>
+            <div class="sistema-desc">Aplicativo para carga y control de licencias docentes. Fallas frecuentes generan expedientes adicionales en SADE que procesa Despacho.</div>
             <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
-            <div class="sistema-problema">⚠️ Las fallas en MIA se derivan a RRHH que debe gestionar el expediente de error, sumando carga a la coordinación.</div>
+            <div class="sistema-problema">⚠️ Cada falla de MIA genera un expediente SADE extra que el equipo de 3 personas debe tramitar sin que haya aumentado el personal.</div>
             <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
           </div>
           <div class="sistema-card">
             <div class="sistema-name">Mail / WhatsApp DG</div>
             <div class="sistema-type">Pedidos de la Dirección General · Sin trazabilidad</div>
-            <div class="sistema-desc">Solicitudes urgentes de la DG que llegan por mail o WhatsApp directo. Canal de alta prioridad pero sin registro formal ni número de expediente.</div>
-            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad</span></div>
-            <div class="sistema-problema">⚠️ Estos pedidos interrumpen el flujo normal de trabajo y no quedan registrados en ningún sistema. Imposible medir su volumen o tiempo de respuesta.</div>
+            <div class="sistema-desc">Solicitudes urgentes de la DG que llegan por mail o WhatsApp directo. Alta prioridad, sin número de expediente, sin registro formal.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad · alta prioridad</span></div>
+            <div class="sistema-problema">⚠️ Interrumpen el flujo normal de trabajo sin quedar registrados. Imposible medir su volumen o tiempo de respuesta. No hay separación entre pedidos urgentes reales y consultas que podrían esperar.</div>
             <span class="sistema-badge sb-manual">Informal / sin registro</span>
           </div>
         </div>
       </div>
       <div id="rrhh-carga" class="inner-panel">
-        <div class="carga-intro">Despacho es la coordinación transversal del área: recibe expedientes de todas las demás coordinaciones y opera 6 sistemas distintos del GCBA. 3 personas gestionan todo. El pico de trabajo ocurre cuando se publican listados — en ese momento los recursos jerárquicos llegan en masa y la planilla de seguimiento se convierte en el punto más frágil del proceso.</div>
+        <div class="carga-intro">Datos extraídos del registro real de expedientes (Google Sheets). 24.969 registros totales, con datos válidos 2022–2026 de 15.540 expedientes. El Excel es el único registro histórico del equipo: una vez que un expediente se archiva en SADE, se pierde el acceso. Si se borra una fila del Sheets, esa información es irrecuperable.</div>
         <div class="carga-grid">
-          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val" style="color:var(--danger)">3</div><div class="carga-sub">Asistentes administrativos</div></div>
-          <div class="carga-card"><div class="carga-label">Pico de trabajo</div><div class="carga-val" style="font-size:14px;color:var(--danger)">Post-publicación listados</div><div class="carga-sub">Recursos jerárquicos llegan en masa</div></div>
-          <div class="carga-card"><div class="carga-label">Mayor riesgo operativo</div><div class="carga-val" style="font-size:14px">Google Sheets compartido</div><div class="carga-sub">Sin control de versiones ni permisos por usuario</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
-          <div class="carga-card"><div class="carga-label">Canal sin trazabilidad</div><div class="carga-val" style="font-size:14px">WhatsApp (Junta + DG)</div><div class="carga-sub">Coordinación y pedidos sin registro formal</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:75%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Expedientes 2022–2026</div><div class="carga-val" style="color:var(--accent)">15.540</div><div class="carga-sub">Registros con fecha válida</div></div>
+          <div class="carga-card"><div class="carga-label">Pico 2024</div><div class="carga-val" style="color:var(--danger)">5.567</div><div class="carga-sub">Casi el doble que 2023 (3.053)</div></div>
+          <div class="carga-card"><div class="carga-label">Tiempo promedio de resolución</div><div class="carga-val" style="color:var(--warn)">45,9 días</div><div class="carga-sub">Mediana: 14 días · máximo: 365 días</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:80%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Sin clasificar (campo TEMA vacío)</div><div class="carga-val" style="color:var(--danger)">35%</div><div class="carga-sub">Información irrecuperable de expedientes cerrados</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:35%;background:var(--danger)"></div></div></div>
         </div>
-        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+
+        <div class="critical-title" style="margin-bottom:8px">Tipos de expediente (TEMA)</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Recurso / Reclamo</div><div class="tarea-freq">9.448</div><div class="tarea-tipo tipo-urgente">38% · Listados de ingreso, titulares, I y S</div></div>
+          <div class="tarea-row"><div class="tarea-name">Disp / Reub / Ren</div><div class="tarea-freq">2.592</div><div class="tarea-tipo tipo-criterio">10% · Disponibilidades, reubicaciones, renuncias</div></div>
+          <div class="tarea-row"><div class="tarea-name">Adicional por título</div><div class="tarea-freq">1.809</div><div class="tarea-tipo tipo-repetitivo">7%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Concurso</div><div class="tarea-freq">1.774</div><div class="tarea-tipo tipo-criterio">7% · Designaciones titular por concurso</div></div>
+          <div class="tarea-row"><div class="tarea-name">Sin tema asignado</div><div class="tarea-freq">8.775</div><div class="tarea-tipo tipo-urgente">35% · campo vacío · irrecuperable</div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Tiempo de resolución (casos con fecha válida)</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Resueltos el mismo día</div><div class="tarea-freq">2.625</div><div class="tarea-tipo tipo-ok" style="background:var(--ok-bg);color:var(--ok)">inmediato</div></div>
+          <div class="tarea-row"><div class="tarea-name">Resueltos en 1–7 días</div><div class="tarea-freq">3.790</div><div class="tarea-tipo tipo-ok" style="background:var(--ok-bg);color:var(--ok)">rápido</div></div>
+          <div class="tarea-row"><div class="tarea-name">Resueltos en 8–30 días</div><div class="tarea-freq">2.402</div><div class="tarea-tipo tipo-criterio">moderado</div></div>
+          <div class="tarea-row"><div class="tarea-name">Resueltos en más de 30 días</div><div class="tarea-freq">6.077</div><div class="tarea-tipo tipo-urgente">39% · incluye recursos jerárquicos (hasta 60 días)</div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Meses pico 2025</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Noviembre</div><div class="tarea-freq">567</div><div class="tarea-tipo tipo-urgente">Pico máximo · publicación listados</div></div>
+          <div class="tarea-row"><div class="tarea-name">Abril</div><div class="tarea-freq">551</div><div class="tarea-tipo tipo-urgente">Segundo pico · inicio ciclo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Septiembre</div><div class="tarea-freq">452</div><div class="tarea-tipo tipo-warn" style="background:var(--warn-bg);color:var(--warn)">Tercer pico</div></div>
+          <div class="tarea-row"><div class="tarea-name">Junio / Julio</div><div class="tarea-freq">~150</div><div class="tarea-tipo tipo-repetitivo">Meses más tranquilos</div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Problemas de calidad del dato identificados</div>
         <div class="tareas-list">
-          <div class="tarea-row"><div class="tarea-name">Ingreso y clasificación de expedientes SADE (recursos jerárquicos, reubicaciones, licencias)</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Análisis del expediente con consulta a la Junta vía WhatsApp</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
-          <div class="tarea-row"><div class="tarea-name">Registro del expediente en Google Sheets</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Generación de EX, IF y CCOO en SADE/GEDO</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Atención de pedidos urgentes de la DG por mail/WhatsApp</div><div class="tarea-freq">Variable</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
-          <div class="tarea-row"><div class="tarea-name">Control de fichadas y presentismo en SIAL</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Gestión de licencias y tickets por fallas en MIA</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Alta de contratos TD, HC, LOYS y vocalías en SADE</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Recuperación de información perdida en la planilla</div><div class="tarea-freq">Eventual</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Campo ANALISTA vacío</div><div class="tarea-freq">96%</div><div class="tarea-tipo tipo-urgente">Sin responsable identificado en casi todos los registros</div></div>
+          <div class="tarea-row"><div class="tarea-name">Errores tipográficos en ESTADO</div><div class="tarea-freq">"fianlizado"</div><div class="tarea-tipo tipo-urgente">Sin validación · filtros no funcionan correctamente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Fechas con valores inválidos</div><div class="tarea-freq">25+ celdas</div><div class="tarea-tipo tipo-warn" style="background:var(--warn-bg);color:var(--warn)">Carga manual sin validación de formato</div></div>
+          <div class="tarea-row"><div class="tarea-name">Tiempo de resolución</div><div class="tarea-freq">No calculado</div><div class="tarea-tipo tipo-urgente">No existe ninguna fórmula que lo calcule automáticamente</div></div>
         </div>
       </div>
       <div id="rrhh-auto" class="inner-panel">
@@ -585,7 +606,7 @@
           <div class="sistema-card">
             <div class="sistema-name">Ticketera (app interna)</div>
             <div class="sistema-type">Gestión de consultas por mail · Desarrollo propio del equipo de Sistemas</div>
-            <div class="sistema-desc">App web desarrollada internamente. Recibe los mails de cadentuescuela@bue.edu.ar y permite al coordinador asignar casos a agentes. La asignación masiva se evita porque entre los mails puede haber casos especiales de la Unidad de Ministro.</div>
+            <div class="sistema-desc">App web desarrollada internamente. Recibe los mails de <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af9fbfefff4eeefffe9f9effff6fbdaf8efffb4fffeefb4fbe8">[email&#160;protected]</a> y permite al coordinador asignar casos a agentes. La asignación masiva se evita porque entre los mails puede haber casos especiales de la Unidad de Ministro.</div>
             <div class="sistema-meta"><span class="sistema-acceso">🔧 Integración posible</span></div>
             <div class="sistema-problema">⚠️ La revisión manual de cada mail antes de asignar genera un cuello de botella en el coordinador. Sin clasificación automática, el coordinador dedica tiempo a lectura en lugar de gestión.</div>
             <span class="sistema-badge sb-api">App interna · API negociable</span>
@@ -609,7 +630,7 @@
           <div class="sistema-card">
             <div class="sistema-name">Mail institucional</div>
             <div class="sistema-type">Canal de entrada · 73-78% del volumen total</div>
-            <div class="sistema-desc">cadentuescuela@bue.edu.ar es el canal principal. Los mails llegan a la ticketera donde el coordinador los asigna. También llegan mails directos a la Ministra o a la Directora de Área que se derivan como casos especiales.</div>
+            <div class="sistema-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a7c4c6c3c2c9d3d2c2d4c4d2c2cbc6e7c5d2c289c2c3d289c6d5">[email&#160;protected]</a> es el canal principal. Los mails llegan a la ticketera donde el coordinador los asigna. También llegan mails directos a la Ministra o a la Directora de Área que se derivan como casos especiales.</div>
             <div class="sistema-meta"><span class="sistema-acceso">📬 Casilla compartida</span></div>
             <div class="sistema-problema">⚠️ No hay acuse de recibo automático al docente. El docente no sabe si su consulta fue recibida ni cuándo será respondida.</div>
             <span class="sistema-badge sb-mail">Mail institucional GCBA</span>
@@ -633,31 +654,51 @@
         </div>
       </div>
       <div id="cad-carga" class="inner-panel">
-        <div class="carga-intro">Los datos provienen del dashboard de seguimiento de consultas (Power BI). 2025: 32.453 consultas totales, 18.100 docentes alcanzados. Febrero 2026: 1.905 consultas, 1.440 docentes. El canal mail representa entre el 73 y el 78% del volumen. El área Media es la más demandante con diferencia.</div>
+        <div class="carga-intro">Datos extraídos del registro real de consultas (Google Sheets). 41.622 registros totales desde febrero 2025 hasta hoy. 17.633 docentes únicos atendidos. El 75% llega por correo electrónico. El área Media representa el 45% del volumen total.</div>
         <div class="carga-grid">
-          <div class="carga-card"><div class="carga-label">Consultas 2025</div><div class="carga-val" style="color:var(--accent)">32.453</div><div class="carga-sub">18.100 docentes alcanzados</div></div>
-          <div class="carga-card"><div class="carga-label">Consultas feb 2026</div><div class="carga-val">1.905</div><div class="carga-sub">1.440 docentes · solo en febrero</div></div>
-          <div class="carga-card"><div class="carga-label">Canal principal</div><div class="carga-val" style="font-size:14px">Correo electrónico</div><div class="carga-sub">73–78% del volumen total</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:76%;background:var(--accent)"></div></div></div>
-          <div class="carga-card"><div class="carga-label">Sala virtual (Zoom)</div><div class="carga-val" style="font-size:14px">20–26%</div><div class="carga-sub">Sin métricas de espera disponibles</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:23%;background:var(--info)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Total registros (feb 2025 – abr 2026)</div><div class="carga-val" style="color:var(--accent)">41.622</div><div class="carga-sub">17.633 docentes únicos</div></div>
+          <div class="carga-card"><div class="carga-label">2025 completo</div><div class="carga-val">32.453</div><div class="carga-sub">2026 va 9.169 en los primeros 4 meses</div></div>
+          <div class="carga-card"><div class="carga-label">Canal mail</div><div class="carga-val">31.378</div><div class="carga-sub">75,4% del volumen total</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:75%;background:var(--accent)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Canal Zoom</div><div class="carga-val">10.120</div><div class="carga-sub">24,3% · sin métricas de espera</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:24%;background:var(--info)"></div></div></div>
         </div>
-        <div class="critical-title" style="margin-bottom:8px">Top motivos de consulta (2025)</div>
+
+        <div class="critical-title" style="margin-bottom:8px">Estacionalidad — meses pico 2025</div>
         <div class="tareas-list" style="margin-bottom:1.5rem">
-          <div class="tarea-row"><div class="tarea-name">Documentación</div><div class="tarea-freq">6.943</div><div class="tarea-tipo tipo-repetitivo">21,4%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Acto público</div><div class="tarea-freq">5.708</div><div class="tarea-tipo tipo-repetitivo">17,6%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Inscripción</div><div class="tarea-freq">3.733</div><div class="tarea-tipo tipo-repetitivo">11,5%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Cuenta @BUE</div><div class="tarea-freq">3.612</div><div class="tarea-tipo tipo-repetitivo">11,1%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Listados / Puntaje</div><div class="tarea-freq">3.186</div><div class="tarea-tipo tipo-criterio">9,8%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Concursos</div><div class="tarea-freq">2.637</div><div class="tarea-tipo tipo-criterio">8,1%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Tema no relacionado al CAD</div><div class="tarea-freq">2.309</div><div class="tarea-tipo tipo-urgente">7,1%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Reconsideraciones</div><div class="tarea-freq">1.491</div><div class="tarea-tipo tipo-criterio">4,6%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Abril</div><div class="tarea-freq">5.779</div><div class="tarea-tipo tipo-urgente">Pico máximo · inicio ciclo lectivo + actos públicos</div></div>
+          <div class="tarea-row"><div class="tarea-name">Marzo</div><div class="tarea-freq">4.433</div><div class="tarea-tipo tipo-urgente">Segundo pico · inscripciones</div></div>
+          <div class="tarea-row"><div class="tarea-name">Diciembre</div><div class="tarea-freq">3.509</div><div class="tarea-tipo tipo-warn" style="background:var(--warn-bg);color:var(--warn)">Cierre · nuevas publicaciones de listados</div></div>
+          <div class="tarea-row"><div class="tarea-name">Junio / Julio</div><div class="tarea-freq">~1.700</div><div class="tarea-tipo tipo-repetitivo">Meses más tranquilos del año</div></div>
         </div>
-        <div class="critical-title" style="margin-bottom:8px">Top áreas por volumen (2025)</div>
+
+        <div class="critical-title" style="margin-bottom:8px">Top motivos (acumulado total)</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Documentación</div><div class="tarea-freq">11.117</div><div class="tarea-tipo tipo-repetitivo">26,7%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Acto público</div><div class="tarea-freq">7.970</div><div class="tarea-tipo tipo-repetitivo">19,1%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Listados / Puntaje</div><div class="tarea-freq">6.589</div><div class="tarea-tipo tipo-criterio">15,8%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Inscripción</div><div class="tarea-freq">6.547</div><div class="tarea-tipo tipo-repetitivo">15,7%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Cuenta @BUE</div><div class="tarea-freq">4.706</div><div class="tarea-tipo tipo-repetitivo">11,3%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Tema no relacionado al CAD</div><div class="tarea-freq">3.871</div><div class="tarea-tipo tipo-urgente">9,3% · se atienden sin ser responsabilidad del CAD</div></div>
+          <div class="tarea-row"><div class="tarea-name">Concursos</div><div class="tarea-freq">3.045</div><div class="tarea-tipo tipo-criterio">7,3%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Reconsideraciones</div><div class="tarea-freq">2.860</div><div class="tarea-tipo tipo-criterio">6,9%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Artículo 65L</div><div class="tarea-freq">2.059</div><div class="tarea-tipo tipo-criterio">4,9%</div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Top áreas por volumen (total)</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Media</div><div class="tarea-freq">18.758</div><div class="tarea-tipo tipo-urgente">45,1% del total</div></div>
+          <div class="tarea-row"><div class="tarea-name">Primaria</div><div class="tarea-freq">4.060</div><div class="tarea-tipo tipo-repetitivo">9,8%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Aspirante a la docencia</div><div class="tarea-freq">4.019</div><div class="tarea-tipo tipo-repetitivo">9,7%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Curricular</div><div class="tarea-freq">3.581</div><div class="tarea-tipo tipo-repetitivo">8,6%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Técnica</div><div class="tarea-freq">2.877</div><div class="tarea-tipo tipo-repetitivo">6,9%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Inicial</div><div class="tarea-freq">2.873</div><div class="tarea-tipo tipo-repetitivo">6,9%</div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Distribución por día y hora</div>
         <div class="tareas-list">
-          <div class="tarea-row"><div class="tarea-name">Media</div><div class="tarea-freq">14.361</div><div class="tarea-tipo tipo-urgente">44,2%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Primaria</div><div class="tarea-freq">3.112</div><div class="tarea-tipo tipo-repetitivo">9,6%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Aspirante a la docencia</div><div class="tarea-freq">2.949</div><div class="tarea-tipo tipo-repetitivo">9,1%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Curricular</div><div class="tarea-freq">2.878</div><div class="tarea-tipo tipo-repetitivo">8,9%</div></div>
-          <div class="tarea-row"><div class="tarea-name">Técnica</div><div class="tarea-freq">2.405</div><div class="tarea-tipo tipo-repetitivo">7,4%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Días más cargados</div><div class="tarea-freq">Mar · Lun</div><div class="tarea-tipo tipo-urgente">9.184 / 8.773 consultas</div></div>
+          <div class="tarea-row"><div class="tarea-name">Horas pico</div><div class="tarea-freq">10hs – 12hs</div><div class="tarea-tipo tipo-urgente">+5.000 registros por franja horaria</div></div>
+          <div class="tarea-row"><div class="tarea-name">Fin de semana</div><div class="tarea-freq">556</div><div class="tarea-tipo tipo-repetitivo">Mails fuera de horario registrados después</div></div>
+          <div class="tarea-row"><div class="tarea-name">Turnos Zoom</div><div class="tarea-freq">Mañana = Tarde</div><div class="tarea-tipo tipo-criterio">2.873 cada uno · Noche: 239</div></div>
         </div>
       </div>
       <div id="cad-auto" class="inner-panel">
@@ -669,7 +710,7 @@
   </main>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const etapasData = {
   listados: [
     {num:1,title:"Recepción y validación de documentación",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Listados","Docente"],norma:"Art. 13 E.D. + SCD",detalle:"El docente envía documentación a validacion.scd@bue.edu.ar. El equipo analiza y aprueba o rechaza. Si falta algo, queda pendiente para carga posterior.",riesgo:null},
@@ -742,9 +783,11 @@ const autoData = {
     {icon:"📋",name:"Registro centralizado de ingresantes al CA",trigger:"Trigger: actualización de listado de ingresantes",impact:"medio",desc:"Cuando se actualiza el listado de ingresantes al Curso de Ascenso, automatización lo registra en Airtable, notifica a DGPDYND y genera un resumen estructurado para el envío formal.",nodes:["Google Sheets Trigger","Airtable node","Gmail node"]},
   ],
   rrhh: [
-    {icon:"📋",name:"Registro de expedientes con historial de cambios",trigger:"Condición: reemplazar Google Sheets compartido por base con control de versiones",impact:"alto",desc:"Migrar el Sheets de seguimiento de expedientes a una herramienta que registre quién modificó qué y cuándo. Google Sheets ya tiene historial de versiones nativo — basta con activarlo y restringir permisos por columna. Elimina el riesgo de pérdida de datos sin cambiar la herramienta.",cond:"Condición: decisión del equipo de adoptar permisos por rango. No requiere desarrollo."},
-    {icon:"💬",name:"Reemplazar WhatsApp con Junta por Google Chat",trigger:"Condición: la Junta debe tener cuenta de Google Workspace GCBA",impact:"alto",desc:"Google Chat (ya disponible en el Google Workspace del GCBA) permite crear espacios de conversación con historial permanente, búsqueda y archivos adjuntos. Reemplazar WhatsApp por Chat convierte cada intercambio con la Junta en un registro formal vinculable al expediente.",cond:"Condición: ambas partes usan cuentas @bue.edu.ar. No requiere nueva herramienta."},
-    {icon:"🔔",name:"Alerta automática de pico por publicación de listados",trigger:"Trigger: publicación de nuevo listado en COREAP",impact:"medio",desc:"Cuando se publica un listado nuevo, se dispara automáticamente una alerta al equipo de Despacho informando que en los próximos 5 días hábiles aumentará el ingreso de recursos jerárquicos. Permite anticipar la carga en lugar de reaccionar.",cond:"Condición: que la publicación del listado genere un evento detectable (mail de notificación, cambio en Google Sheet, o webhook de COREAP)."},
+    {icon:"✅",name:"Dropdowns forzados en el Google Sheets",trigger:"Condición: acceso al Google Sheets para configurar validación de datos",impact:"alto",desc:"Agregar validación de datos en los campos ESTADO (finalizado / en tramite / pendiente), TEMA (lista fija) y ANALISTA (lista de personas). Elimina los errores tipográficos ('fianlizado', 'finalziado') que hoy rompen los filtros y hacen inútiles los reportes. El 35% de registros sin TEMA y el 96% sin ANALISTA se resuelven en parte con esta sola acción.",cond:"Condición: no requiere desarrollo. Solo configuración nativa de Google Sheets. Se puede hacer en 30 minutos y no cambia ningún flujo de trabajo."},
+    {icon:"⏱️",name:"Columna de tiempo de resolución automática",trigger:"Condición: campos FECHA_INGRESO y FECHA_CIERRE ya existen en el Sheets",impact:"alto",desc:"Agregar una columna con fórmula =FECHA_CIERRE - FECHA_INGRESO que calcule automáticamente los días de resolución de cada expediente. Por primera vez el equipo tendría una métrica de tiempo de respuesta sin hacer nada diferente. El promedio actual es 45,9 días y el 39% tarda más de 30 días — datos que hoy no están disponibles para gestión.",cond:"Condición: los campos de fecha ya existen. Solo requiere agregar la columna con la fórmula. No cambia ningún proceso."},
+    {icon:"💬",name:"Reemplazar WhatsApp con Junta por Google Chat",trigger:"Condición: la Junta tiene cuentas @bue.edu.ar de Google Workspace",impact:"alto",desc:"Google Chat está disponible en el Google Workspace del GCBA con las mismas cuentas @bue.edu.ar. Crear un espacio compartido con la Junta convierte cada intercambio en un registro permanente con fecha, buscable y vinculable al número de expediente. Sin costo adicional, sin aprobación de nuevas herramientas.",cond:"Condición: ambas partes ya tienen cuentas @bue.edu.ar. Solo requiere que la Junta acepte usar Google Chat en lugar de WhatsApp para las consultas de expedientes."},
+    {icon:"🔔",name:"Alerta de pico por publicación de listados",trigger:"Trigger: publicación de nuevo listado en COREAP",impact:"medio",desc:"Noviembre y abril son los meses de mayor ingreso de expedientes (567 y 551 en 2025). Cuando se publica un listado, el equipo tiene 5 días hábiles antes de que empiecen a llegar los recursos. Una alerta automática al publicarse el listado da tiempo de anticipar la carga en lugar de reaccionar.",cond:"Condición: que la publicación del listado genere un evento detectable — un mail de notificación interna, un cambio en el Sheets de seguimiento de listados, o acceso a la API de COREAP."},
+    {icon:"📊",name:"Reporte mensual automático de expedientes",trigger:"Trigger: scheduler mensual · primer día hábil de cada mes",impact:"medio",desc:"El primer día de cada mes, se genera automáticamente un resumen del mes anterior: total de expedientes por tipo, tiempo promedio de resolución, expedientes que superaron los 30 días, distribución por analista. Reemplaza el armado manual de reportes y da visibilidad a la Dirección sin trabajo extra del equipo.",cond:"Condición: que los dropdowns forzados y la columna de tiempo de resolución estén implementados primero. El Google Sheets ya tiene todo lo necesario."},
   ],
   cad: [
     {icon:"🔧",name:"Clasificación automática de mails en la ticketera",trigger:"Condición: acceso a la API o base de datos de la ticketera (app interna de Sistemas)",impact:"alto",desc:"Al ingresar un mail a la ticketera, se analiza el asunto y cuerpo para clasificarlo automáticamente por motivo (Documentación, Acto público, @BUE, etc.) y área del docente. El coordinador ve el mail ya etiquetado y puede asignar con confianza — incluso en modo masivo, porque los casos especiales quedan marcados con una etiqueta diferente.",cond:"Condición: coordinar con el equipo de Sistemas para agregar un campo 'clasificación' a la ticketera y exponer un endpoint o webhook de entrada de mails. Es la integración más estratégica del proyecto."},
@@ -816,18 +859,4 @@ document.addEventListener('DOMContentLoaded', function() {
       showSection(el.dataset.sec);
     });
   });
-  document.querySelectorAll('.overview-card[data-sec]').forEach(function(el) {
-    el.addEventListener('click', function() {
-      showSection(el.dataset.sec);
-    });
-  });
-  document.querySelectorAll('.inner-tab[data-inner]').forEach(function(el) {
-    el.addEventListener('click', function() {
-      showInner(el.dataset.sec, el.dataset.inner, el);
-    });
-  });
-  buildEtapas('listados');
-});
-</script>
-</body>
-</html>
+  document.querySelectorAll('.overview-card[data-sec]').fo
