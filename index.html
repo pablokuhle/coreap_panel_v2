@@ -143,6 +143,9 @@
   .sb-mail { background: var(--info-bg); color: var(--info); }
   .sb-manual { background: var(--warn-bg); color: var(--warn); }
   .sb-formulario { background: var(--purple-bg); color: var(--purple); }
+  .sistema-meta { margin-top: 8px; margin-bottom: 4px; }
+  .sistema-acceso { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+  .sistema-problema { margin-top: 6px; font-size: 11px; color: var(--danger); line-height: 1.5; padding: 6px 8px; background: var(--danger-bg); border-radius: 6px; }
 
   /* AUTOMATIZACION PANEL */
   .auto-intro { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; color: var(--muted); line-height: 1.6; }
@@ -160,6 +163,8 @@
   .auto-card-desc { font-size: 12.5px; color: #515154; line-height: 1.6; margin-bottom: 10px; }
   .auto-nodes { display: flex; flex-wrap: wrap; gap: 5px; }
   .auto-node { font-family: var(--font-mono); font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+  .auto-cond { margin-top: 8px; font-size: 11.5px; color: #515154; line-height: 1.55; padding: 8px 10px; background: var(--surface); border-radius: 7px; border-left: 2px solid var(--accent); }
+  .auto-cond-label { font-family: var(--font-mono); font-size: 9px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 3px; }
 
   /* CARGA PANEL */
   .carga-intro { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; color: var(--muted); line-height: 1.6; }
@@ -233,7 +238,7 @@
     <div class="nav-item" data-sec="apel"><div class="nav-dot" style="background:#d4943a"></div>APEL<span class="nav-count">7</span></div>
     <div class="nav-item" data-sec="concursos"><div class="nav-dot" style="background:#5a9fd4"></div>Concursos<span class="nav-count">8</span></div>
     <div class="nav-item" data-sec="rrhh"><div class="nav-dot" style="background:#5aaa7a"></div>RRHH / Admin<span class="nav-count">7</span></div>
-    <div class="nav-item" data-sec="cad"><div class="nav-dot" style="background:#9a7ad4"></div>CAD en tu Escuela<span class="nav-count">6</span></div>
+    <div class="nav-item" data-sec="cad"><div class="nav-dot" style="background:#9a7ad4"></div>CAD en tu Escuela<span class="nav-count">7</span></div>
     <div class="aside-divider"></div>
     <div class="aside-label">Dotación actual</div>
     <div class="aside-stats">
@@ -257,7 +262,7 @@
       <div class="stats-row">
         <div class="stat-card"><div class="stat-card-label">Total etapas</div><div class="stat-card-val">38</div></div>
         <div class="stat-card"><div class="stat-card-label">Plazos críticos</div><div class="stat-card-val danger">4</div></div>
-        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">17</div></div>
+        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">19</div></div>
         <div class="stat-card"><div class="stat-card-label">Sistemas en uso</div><div class="stat-card-val ok">11</div></div>
       </div>
       <div class="overview-grid">
@@ -286,7 +291,7 @@
           <div class="overview-arrow">Ver coordinación →</div>
         </div>
         <div class="overview-card" data-sec="cad">
-          <div class="overview-card-top"><div class="overview-card-name">🎓 CAD en tu Escuela</div><div class="overview-card-count">12 personas · 6 etapas · 2 auto</div></div>
+          <div class="overview-card-top"><div class="overview-card-name">🎓 CAD en tu Escuela</div><div class="overview-card-count">12 personas · 7 etapas · 6 auto</div></div>
           <div class="overview-card-desc">Atención de consultas docentes por ZOOM y mail. Derivación y resolución en tiempo real.</div>
           <div class="overview-risks"><span class="risk-tag badge-danger">Resolución en tiempo real</span><span class="risk-tag badge-danger">Derivación inmediata</span></div>
           <div class="overview-arrow">Ver coordinación →</div>
@@ -471,8 +476,8 @@
       <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
       <div class="section-header">
         <div class="section-eyebrow">Coordinación 04</div>
-        <div class="section-title">RRHH / Administración</div>
-        <div class="section-desc">Gestión de expedientes SADE, altas y bajas de agentes, licencias y proyectos de resolución. 3 asistentes administrativos.</div>
+        <div class="section-title">RRHH / Despacho</div>
+        <div class="section-desc">Gestión de expedientes SADE, recursos jerárquicos, altas y bajas de agentes, licencias y proyectos de resolución. 3 asistentes administrativos.</div>
       </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="rrhh" data-inner="etapas">ETAPAS Y PLAZOS</div>
@@ -483,35 +488,79 @@
       <div id="rrhh-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-rrhh"></div></div>
       <div id="rrhh-sistemas" class="inner-panel">
         <div class="sistemas-grid">
-          <div class="sistema-card"><div class="sistema-name">SADE</div><div class="sistema-type">Sistema central de expedientes</div><div class="sistema-desc">Generación de EX, IF en GEDO, CCOO. Toda la tramitación formal de recursos, licencias y designaciones pasa por SADE.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
-          <div class="sistema-card"><div class="sistema-name">SIAL</div><div class="sistema-type">Control de presentismo</div><div class="sistema-desc">Carga de Comisiones de Servicios, control de fichadas, distribución de horarios y lugar de trabajo.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
-          <div class="sistema-card"><div class="sistema-name">MIA</div><div class="sistema-type">Gestión de licencias</div><div class="sistema-desc">Aplicativo para carga y control de licencias docentes. Generación de tickets por fallas frecuentes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
-          <div class="sistema-card"><div class="sistema-name">SASUM</div><div class="sistema-type">Contratos LOYS</div><div class="sistema-desc">DGCDO carga información de contratos LOYS. RRHH genera EX de vinculación a partir de esta carga.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
-          <div class="sistema-card"><div class="sistema-name">G-FAMA</div><div class="sistema-type">Salario familiar docente</div><div class="sistema-desc">Sistema de DGPDYND para tramitación del salario familiar de docentes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
-          <div class="sistema-card"><div class="sistema-name">Correo / WhatsApp</div><div class="sistema-type">Reclamos y consultas DG</div><div class="sistema-desc">Solicitudes de la Dirección General vía correo electrónico y WhatsApp. Canal informal pero de alta prioridad.</div><span class="sistema-badge sb-mail">Informal / sin registro</span></div>
+          <div class="sistema-card">
+            <div class="sistema-name">SADE</div>
+            <div class="sistema-type">Sistema central de expedientes · Cerrado GCBA</div>
+            <div class="sistema-desc">Generación de EX, IF en GEDO, CCOO. Toda la tramitación formal de recursos, licencias y designaciones pasa por SADE.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
+            <div class="sistema-problema">⚠️ No permite ver el estado de un expediente en tiempo real sin abrir cada uno manualmente.</div>
+            <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Google Sheets (base de datos de expedientes)</div>
+            <div class="sistema-type">Seguimiento manual · Informal</div>
+            <div class="sistema-desc">Planilla compartida donde se registran los expedientes ingresados, estado y responsable. Usada como base de datos operativa.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👥 Acceso compartido</span></div>
+            <div class="sistema-problema">⚠️ Sin control de versiones: si alguien borra o sobreescribe una fila, la información se pierde sin posibilidad de recuperación inmediata. No tiene permisos granulares por usuario.</div>
+            <span class="sistema-badge sb-manual">Manual / riesgo de pérdida</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">WhatsApp</div>
+            <div class="sistema-type">Coordinación con Junta · Sin trazabilidad</div>
+            <div class="sistema-desc">Canal informal usado para consultar a la Junta de Clasificación sobre expedientes en análisis. No queda registro formal de las respuestas obtenidas.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad</span></div>
+            <div class="sistema-problema">⚠️ Las respuestas de la Junta por WhatsApp no son un instrumento válido. Si hay un conflicto posterior, no hay evidencia del intercambio.</div>
+            <span class="sistema-badge sb-manual">Informal / sin registro</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">SIAL</div>
+            <div class="sistema-type">Control de presentismo · Cerrado GCBA</div>
+            <div class="sistema-desc">Carga de Comisiones de Servicios, control de fichadas y distribución de horarios.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
+            <div class="sistema-problema">⚠️ Fallas en el sistema generan tickets y expedientes adicionales que recaen sobre RRHH.</div>
+            <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">MIA</div>
+            <div class="sistema-type">Gestión de licencias · Cerrado GCBA</div>
+            <div class="sistema-desc">Aplicativo para carga y control de licencias docentes. Fallas frecuentes generan expedientes adicionales en SADE.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual</span></div>
+            <div class="sistema-problema">⚠️ Las fallas en MIA se derivan a RRHH que debe gestionar el expediente de error, sumando carga a la coordinación.</div>
+            <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Mail / WhatsApp DG</div>
+            <div class="sistema-type">Pedidos de la Dirección General · Sin trazabilidad</div>
+            <div class="sistema-desc">Solicitudes urgentes de la DG que llegan por mail o WhatsApp directo. Canal de alta prioridad pero sin registro formal ni número de expediente.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad</span></div>
+            <div class="sistema-problema">⚠️ Estos pedidos interrumpen el flujo normal de trabajo y no quedan registrados en ningún sistema. Imposible medir su volumen o tiempo de respuesta.</div>
+            <span class="sistema-badge sb-manual">Informal / sin registro</span>
+          </div>
         </div>
       </div>
       <div id="rrhh-carga" class="inner-panel">
-        <div class="carga-intro">RRHH/Admin es la coordinación transversal: recibe work-in de todas las demás coordinaciones y múltiples sistemas del GCBA. 3 personas gestionan todo.</div>
+        <div class="carga-intro">Despacho es la coordinación transversal del área: recibe expedientes de todas las demás coordinaciones y opera 6 sistemas distintos del GCBA. 3 personas gestionan todo. El pico de trabajo ocurre cuando se publican listados — en ese momento los recursos jerárquicos llegan en masa y la planilla de seguimiento se convierte en el punto más frágil del proceso.</div>
         <div class="carga-grid">
           <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val" style="color:var(--danger)">3</div><div class="carga-sub">Asistentes administrativos</div></div>
-          <div class="carga-card"><div class="carga-label">Sistemas que operan</div><div class="carga-val">6</div><div class="carga-sub">SADE, SIAL, MIA, SASUM, G-FAMA, GEDO</div></div>
-          <div class="carga-card"><div class="carga-label">Mayor dispersión</div><div class="carga-val" style="font-size:15px">Multi-sistema</div><div class="carga-sub">Cada trámite usa sistemas distintos</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
-          <div class="carga-card"><div class="carga-label">Canal más informal</div><div class="carga-val" style="font-size:15px">WhatsApp DG</div><div class="carga-sub">Alta prioridad, sin registro formal</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:65%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Pico de trabajo</div><div class="carga-val" style="font-size:14px;color:var(--danger)">Post-publicación listados</div><div class="carga-sub">Recursos jerárquicos llegan en masa</div></div>
+          <div class="carga-card"><div class="carga-label">Mayor riesgo operativo</div><div class="carga-val" style="font-size:14px">Google Sheets compartido</div><div class="carga-sub">Sin control de versiones ni permisos por usuario</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Canal sin trazabilidad</div><div class="carga-val" style="font-size:14px">WhatsApp (Junta + DG)</div><div class="carga-sub">Coordinación y pedidos sin registro formal</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:75%;background:var(--warn)"></div></div></div>
         </div>
         <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
         <div class="tareas-list">
-          <div class="tarea-row"><div class="tarea-name">Clasificación y distribución de expedientes SADE</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Ingreso y clasificación de expedientes SADE (recursos jerárquicos, reubicaciones, licencias)</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Análisis del expediente con consulta a la Junta vía WhatsApp</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Registro del expediente en Google Sheets</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
           <div class="tarea-row"><div class="tarea-name">Generación de EX, IF y CCOO en SADE/GEDO</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Atención de pedidos urgentes de la DG por mail/WhatsApp</div><div class="tarea-freq">Variable</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
           <div class="tarea-row"><div class="tarea-name">Control de fichadas y presentismo en SIAL</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Gestión de licencias en MIA</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Reclamos vía WhatsApp/mail de la DG</div><div class="tarea-freq">Variable</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
-          <div class="tarea-row"><div class="tarea-name">Análisis y revisión de expedientes con otras coordinaciones</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
-          <div class="tarea-row"><div class="tarea-name">Alta de contratos TD, HC, LOYS y vocalías</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Gestión de licencias y tickets por fallas en MIA</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Alta de contratos TD, HC, LOYS y vocalías en SADE</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Recuperación de información perdida en la planilla</div><div class="tarea-freq">Eventual</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
         </div>
       </div>
       <div id="rrhh-auto" class="inner-panel">
-        <div class="auto-intro"><strong>Punto de partida recomendado:</strong> El canal WhatsApp/mail de la DG es informal y no tiene registro. Automatizar su captación y derivación es el quick-win más inmediato y de menor resistencia política.</div>
+        <div class="auto-intro"><strong>Situación real:</strong> El mayor problema no es el volumen sino la fragilidad del Google Sheets como base de datos central y el WhatsApp como canal de coordinación con la Junta. Antes de automatizar, hay que estructurar. La prioridad es reemplazar el Sheets compartido por algo con historial de cambios y permisos, y reemplazar WhatsApp por un canal con registro (Chat de Google Workspace ya disponible en el GCBA).</div>
         <div class="auto-oportunidades" id="auto-rrhh"></div>
       </div>
     </div>
@@ -522,7 +571,7 @@
       <div class="section-header">
         <div class="section-eyebrow">Coordinación 05</div>
         <div class="section-title">CAD en tu Escuela</div>
-        <div class="section-desc">Atención de consultas docentes por ZOOM y mail. Derivación interna y producción de contenido. 12 asesores.</div>
+        <div class="section-desc">32.453 consultas en 2025 · 18.100 docentes alcanzados · 12 asesores · atención por Zoom, mail y presencial.</div>
       </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="cad" data-inner="etapas">ETAPAS Y PLAZOS</div>
@@ -533,34 +582,86 @@
       <div id="cad-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Crítico</div><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-cad"></div></div>
       <div id="cad-sistemas" class="inner-panel">
         <div class="sistemas-grid">
-          <div class="sistema-card"><div class="sistema-name">Zoom</div><div class="sistema-type">Canal de atención en vivo</div><div class="sistema-desc">Sala permanente con administrador general que deriva a operadores. Comparte pantalla para acompañar gestiones.</div><span class="sistema-badge sb-api">API disponible</span></div>
-          <div class="sistema-card"><div class="sistema-name">Correo electrónico</div><div class="sistema-type">Canal de entrada alternativo</div><div class="sistema-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32515356575c464757415147575e53725047571c5756471c5340">[email&#160;protected]</a> recibe consultas. El operador las gestiona desde la ticketera asignada.</div><span class="sistema-badge sb-mail">Mail institucional</span></div>
-          <div class="sistema-card"><div class="sistema-name">Formulario de registro</div><div class="sistema-type">Registro de consultas</div><div class="sistema-desc">Formulario donde se registra cada consulta atendida. Sin integración automática con ningún sistema.</div><span class="sistema-badge sb-formulario">Google Forms / similar</span></div>
-          <div class="sistema-card"><div class="sistema-name">Ticketera</div><div class="sistema-type">Asignación de consultas</div><div class="sistema-desc">Sistema donde aparecen las consultas asignadas a cada operador. Vinculado al canal de mail.</div><span class="sistema-badge sb-cerrado">Sistema interno</span></div>
-          <div class="sistema-card"><div class="sistema-name">APEL / SCD / SADE</div><div class="sistema-type">Sistemas consultados</div><div class="sistema-desc">Los asesores consultan estos sistemas para resolver dudas de docentes sobre puntaje, postulaciones y trámites.</div><span class="sistema-badge sb-cerrado">Solo lectura</span></div>
-          <div class="sistema-card"><div class="sistema-name">RRSS / YouTube</div><div class="sistema-type">Difusión de contenido</div><div class="sistema-desc">Publicación de videos tutoriales y contenido educativo. Producción interna del equipo CAD.</div><span class="sistema-badge sb-api">API disponible</span></div>
+          <div class="sistema-card">
+            <div class="sistema-name">Ticketera (app interna)</div>
+            <div class="sistema-type">Gestión de consultas por mail · Desarrollo propio del equipo de Sistemas</div>
+            <div class="sistema-desc">App web desarrollada internamente. Recibe los mails de cadentuescuela@bue.edu.ar y permite al coordinador asignar casos a agentes. La asignación masiva se evita porque entre los mails puede haber casos especiales de la Unidad de Ministro.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">🔧 Integración posible</span></div>
+            <div class="sistema-problema">⚠️ La revisión manual de cada mail antes de asignar genera un cuello de botella en el coordinador. Sin clasificación automática, el coordinador dedica tiempo a lectura en lugar de gestión.</div>
+            <span class="sistema-badge sb-api">App interna · API negociable</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Google Forms + Google Sheets</div>
+            <div class="sistema-type">Registro de consultas atendidas · Google Workspace GCBA</div>
+            <div class="sistema-desc">Formulario completado por el asesor al cerrar cada consulta. Campos: origen, turno, DNI, nombre, mail, área, motivo, ticket, observaciones y quién resolvió. Los datos van a un Google Sheet que se usa como base de datos.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Usuario individual · por asesor</span></div>
+            <div class="sistema-problema">⚠️ El registro se hace manualmente al cierre, lo que genera subregistro cuando hay alta demanda. No hay validación de campos obligatorios en tiempo real.</div>
+            <span class="sistema-badge sb-api">Google Workspace · API disponible</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Zoom</div>
+            <div class="sistema-type">Atención en vivo · Canal principal de sala virtual</div>
+            <div class="sistema-desc">Sala permanente con administrador que deriva docentes a operadores disponibles. 20-26% de las consultas ingresan por este canal. Se usa también para charlas y capacitaciones grupales.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👥 Sala compartida · sin turnos</span></div>
+            <div class="sistema-problema">⚠️ No hay sistema de turnos ni métrica de tiempo de espera. Los docentes se quejan de esperar sin saber cuánto falta. El coordinador no puede demostrar la cantidad de personas en cola ni el tiempo promedio de atención.</div>
+            <span class="sistema-badge sb-api">API disponible</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Mail institucional</div>
+            <div class="sistema-type">Canal de entrada · 73-78% del volumen total</div>
+            <div class="sistema-desc">cadentuescuela@bue.edu.ar es el canal principal. Los mails llegan a la ticketera donde el coordinador los asigna. También llegan mails directos a la Ministra o a la Directora de Área que se derivan como casos especiales.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📬 Casilla compartida</span></div>
+            <div class="sistema-problema">⚠️ No hay acuse de recibo automático al docente. El docente no sabe si su consulta fue recibida ni cuándo será respondida.</div>
+            <span class="sistema-badge sb-mail">Mail institucional GCBA</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">APEL / SCD / SADE</div>
+            <div class="sistema-type">Sistemas de consulta · Solo lectura</div>
+            <div class="sistema-desc">Los asesores acceden para verificar puntaje, estado de postulaciones, documentación cargada y trámites. No pueden modificar datos, solo consultar.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">👤 Solo lectura</span></div>
+            <div class="sistema-problema">⚠️ Fallas frecuentes en SCD para carga de títulos generan consultas que se acumulan y explotan más adelante en el año (pico de reclamos en período de reconsideración).</div>
+            <span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span>
+          </div>
+          <div class="sistema-card">
+            <div class="sistema-name">Unidad de Ministro (canal paralelo)</div>
+            <div class="sistema-type">Casos especiales · Sin sistema formal</div>
+            <div class="sistema-desc">Consultas que llegan directamente a la Ministra o a la Directora de Área por mail o Instagram. Una persona específica del equipo CAD se ocupa exclusivamente de estos casos con atención prioritaria.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">📵 Sin trazabilidad formal</span></div>
+            <div class="sistema-problema">⚠️ Estos casos no pasan por la ticketera ni por el formulario de registro. No existe registro formal de su volumen, tiempos de resolución ni historial. Si la persona asignada no está disponible, no hay protocolo de respaldo.</div>
+            <span class="sistema-badge sb-manual">Flujo paralelo sin registro</span>
+          </div>
         </div>
       </div>
       <div id="cad-carga" class="inner-panel">
-        <div class="carga-intro">CAD tiene la mayor dotación (12 personas) pero enfrenta el mayor volumen de interacción directa con docentes. La presión es continua durante el horario de atención.</div>
+        <div class="carga-intro">Los datos provienen del dashboard de seguimiento de consultas (Power BI). 2025: 32.453 consultas totales, 18.100 docentes alcanzados. Febrero 2026: 1.905 consultas, 1.440 docentes. El canal mail representa entre el 73 y el 78% del volumen. El área Media es la más demandante con diferencia.</div>
         <div class="carga-grid">
-          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val ok">12</div><div class="carga-sub">Asesores de atención y consultas</div></div>
-          <div class="carga-card"><div class="carga-label">Horario pico</div><div class="carga-val" style="font-size:15px">Lunes 10–20hs</div><div class="carga-sub">Jornada más larga de la semana</div></div>
-          <div class="carga-card"><div class="carga-label">Mayor repetición</div><div class="carga-val" style="font-size:15px">Consultas tipo FAQ</div><div class="carga-sub">Puntaje, @BUE, inscripciones, acto público</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:80%;background:var(--warn)"></div></div></div>
-          <div class="carga-card"><div class="carga-label">Punto más crítico</div><div class="carga-val" style="font-size:15px">Derivación en vivo</div><div class="carga-sub">Requiere coordinador disponible al instante</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Consultas 2025</div><div class="carga-val" style="color:var(--accent)">32.453</div><div class="carga-sub">18.100 docentes alcanzados</div></div>
+          <div class="carga-card"><div class="carga-label">Consultas feb 2026</div><div class="carga-val">1.905</div><div class="carga-sub">1.440 docentes · solo en febrero</div></div>
+          <div class="carga-card"><div class="carga-label">Canal principal</div><div class="carga-val" style="font-size:14px">Correo electrónico</div><div class="carga-sub">73–78% del volumen total</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:76%;background:var(--accent)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Sala virtual (Zoom)</div><div class="carga-val" style="font-size:14px">20–26%</div><div class="carga-sub">Sin métricas de espera disponibles</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:23%;background:var(--info)"></div></div></div>
         </div>
-        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="critical-title" style="margin-bottom:8px">Top motivos de consulta (2025)</div>
+        <div class="tareas-list" style="margin-bottom:1.5rem">
+          <div class="tarea-row"><div class="tarea-name">Documentación</div><div class="tarea-freq">6.943</div><div class="tarea-tipo tipo-repetitivo">21,4%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Acto público</div><div class="tarea-freq">5.708</div><div class="tarea-tipo tipo-repetitivo">17,6%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Inscripción</div><div class="tarea-freq">3.733</div><div class="tarea-tipo tipo-repetitivo">11,5%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Cuenta @BUE</div><div class="tarea-freq">3.612</div><div class="tarea-tipo tipo-repetitivo">11,1%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Listados / Puntaje</div><div class="tarea-freq">3.186</div><div class="tarea-tipo tipo-criterio">9,8%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Concursos</div><div class="tarea-freq">2.637</div><div class="tarea-tipo tipo-criterio">8,1%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Tema no relacionado al CAD</div><div class="tarea-freq">2.309</div><div class="tarea-tipo tipo-urgente">7,1%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Reconsideraciones</div><div class="tarea-freq">1.491</div><div class="tarea-tipo tipo-criterio">4,6%</div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:8px">Top áreas por volumen (2025)</div>
         <div class="tareas-list">
-          <div class="tarea-row"><div class="tarea-name">Respuesta a consultas FAQ (puntaje, @BUE, inscripciones)</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Derivación interna de consultas complejas</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
-          <div class="tarea-row"><div class="tarea-name">Registro de consultas en formulario</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
-          <div class="tarea-row"><div class="tarea-name">Actualización de materiales normativos</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
-          <div class="tarea-row"><div class="tarea-name">Producción de videos tutoriales</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
-          <div class="tarea-row"><div class="tarea-name">Resolución de reclamos particulares</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Media</div><div class="tarea-freq">14.361</div><div class="tarea-tipo tipo-urgente">44,2%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Primaria</div><div class="tarea-freq">3.112</div><div class="tarea-tipo tipo-repetitivo">9,6%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Aspirante a la docencia</div><div class="tarea-freq">2.949</div><div class="tarea-tipo tipo-repetitivo">9,1%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Curricular</div><div class="tarea-freq">2.878</div><div class="tarea-tipo tipo-repetitivo">8,9%</div></div>
+          <div class="tarea-row"><div class="tarea-name">Técnica</div><div class="tarea-freq">2.405</div><div class="tarea-tipo tipo-repetitivo">7,4%</div></div>
         </div>
       </div>
       <div id="cad-auto" class="inner-panel">
-        <div class="auto-intro"><strong>Mayor oportunidad:</strong> Un alto porcentaje de las consultas son preguntas frecuentes (FAQ) con respuestas estandarizadas. Un bot de pre-atención reduciría la carga en vivo y reservaría el tiempo del asesor para casos que realmente requieren criterio.</div>
+        <div class="auto-intro"><strong>Ventaja clave:</strong> La ticketera es una app desarrollada por el propio equipo de Sistemas del GCBA. Esto significa que hay posibilidad real de integración directa — sin depender de APIs cerradas ni de terceros. Es el punto de entrada más estratégico de toda la coordinación.</div>
         <div class="auto-oportunidades" id="auto-cad"></div>
       </div>
     </div>
@@ -611,12 +712,13 @@ const etapasData = {
     {num:7,title:"Control de presentismo y gestión SIAL/SADE",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin"],norma:"Art. 6f E.D. · Reglamentación GCBA",detalle:"Análisis de asistencias, fichadas, comisiones. Tickets MIA. GEDO, CCOO, alta de contratos y vocalías Art. 10.",riesgo:null},
   ],
   cad: [
-    {num:1,title:"Ingreso de consulta (ZOOM o mail)",plazo:"Lunes 10–20hs · Mar–Vie 10–16hs",badge:"badge-warn",actors:["Docente","Asesor CAD"],norma:"Instructivo CAD",detalle:"ZOOM: administrador deriva al operador. Mail: operador accede a la ticketera. Registro en formulario.",riesgo:null},
-    {num:2,title:"Diagnóstico de la consulta",plazo:"Tiempo real",badge:"badge-danger",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"¿Se puede resolver? Sí: se informa y comparte pantalla si hace falta. No: se deriva internamente.",riesgo:"⚠️ Alta presión operativa: el asesor debe diagnosticar al instante con el docente conectado."},
-    {num:3,title:"Derivación interna (si aplica)",plazo:"Respuesta inmediata",badge:"badge-danger",actors:["Asesor CAD","Coordinador"],norma:"Instructivo CAD",detalle:"Se deriva internamente. El coordinador responde de inmediato o se responde por mail. Registro de la derivación.",riesgo:"⚠️ Requiere disponibilidad inmediata de coordinadores. Si no están disponibles, el docente queda sin respuesta en el momento."},
-    {num:4,title:"Registro y cierre de la consulta",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"Registro completo en formulario. Se informa la resolución al docente. Permite trazabilidad de casos.",riesgo:null},
-    {num:5,title:"Gestión de reclamos particulares",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Asesor CAD","Coordinador"],norma:"Instructivo CAD",detalle:"Reclamos que requieren gestión particular más allá de la consulta inmediata. Análisis y resolución coordinada.",riesgo:null},
-    {num:6,title:"Actualización de materiales y capacitaciones",plazo:"Continuo",badge:"badge-ok",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"Actualización normativa constante. Charlas orientativas presenciales y virtuales. Producción de videos tutoriales para RRSS.",riesgo:null},
+    {num:1,title:"Ingreso de consulta por mail (ticketera)",plazo:"73–78% del volumen",badge:"badge-warn",actors:["Docente","Coordinador CAD","Asesor CAD"],norma:"Flujo interno CAD",detalle:"El docente escribe a cadentuescuela@bue.edu.ar. El mail ingresa automáticamente a la ticketera — app desarrollada por el equipo de Sistemas del GCBA. El coordinador revisa cada mail individualmente antes de asignar porque puede haber casos especiales de la Unidad de Ministro mezclados con el flujo general.",riesgo:"⚠️ La revisión manual uno a uno es el principal cuello de botella del coordinador. Sin clasificación automática previa, el coordinador no puede delegar la asignación masiva con confianza."},
+    {num:2,title:"Ingreso de consulta por Zoom (sala virtual)",plazo:"20–26% del volumen",badge:"badge-danger",actors:["Docente","Administrador Zoom","Asesor CAD"],norma:"Flujo interno CAD",detalle:"El docente ingresa a la sala general de Zoom. El administrador lo deriva a un operador disponible. El operador comparte pantalla si es necesario para acompañar la gestión. No hay sistema de turnos ni métrica de tiempo de espera.",riesgo:"⚠️ Los docentes se quejan de esperar sin respuesta en la sala. El equipo no puede demostrar cuántas personas están en lista de espera ni cuánto tiempo esperan. Dato clave para justificar recursos: hoy no existe."},
+    {num:3,title:"Casos especiales — Unidad de Ministro",plazo:"Sin plazo definido · Prioridad alta",badge:"badge-danger",actors:["Ministra / Directora de Área","Asesor designado CAD"],norma:"Flujo paralelo sin protocolo formal",detalle:"Consultas que llegan directamente a la Ministra o a la Directora Rocío por mail directo o Instagram. Una persona específica del equipo CAD se ocupa exclusivamente. No pasan por la ticketera ni por el formulario de registro.",riesgo:"⚠️ Sin registro formal: no hay historial, no hay métricas, no hay protocolo de respaldo si la persona asignada no está disponible. Si escala un caso mal resuelto, no hay trazabilidad."},
+    {num:4,title:"Diagnóstico y resolución de la consulta",plazo:"Tiempo real (Zoom) / Variable (mail)",badge:"badge-warn",actors:["Asesor CAD"],norma:"Formulario CAD en tu Escuela",detalle:"El asesor evalúa si puede resolver. Top motivos: Documentación (21%), Acto público (17%), Inscripción (11%), Cuenta @BUE (11%), Listados/Puntaje (10%). Si no puede resolver, deriva internamente al coordinador o a otra área.",riesgo:"⚠️ Las fallas de SCD para carga de títulos generan consultas que se acumulan durante el año y explotan en el período de reconsideración. Son problemas sistémicos que se atienden como consultas individuales sin que haya un reporte agregado a Sistemas."},
+    {num:5,title:"Registro de la consulta en Google Forms",plazo:"Al cierre de cada atención",badge:"badge-ok",actors:["Asesor CAD"],norma:"Formulario interno CAD",detalle:"El asesor completa el formulario: origen, turno, DNI, nombre, mail del docente, área, motivo, número de ticket, observaciones y quién resolvió. Los datos se sincronizan automáticamente a Google Sheets.",riesgo:"⚠️ El registro es post-atención y manual. En momentos de alta demanda se registra tarde o incompleto. El campo 'número de ticket' conecta con la ticketera pero sin integración automática entre ambos sistemas."},
+    {num:6,title:"Derivación a otras coordinaciones (si aplica)",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Asesor CAD","Coordinador CAD","Otras coordinaciones"],norma:"Flujo interno",detalle:"Si la consulta corresponde a Listados, APEL, Concursos o RRHH, se deriva internamente. La derivación no tiene un canal formal: se hace por comunicación directa entre el asesor y el coordinador de la coordinación destino.",riesgo:null},
+    {num:7,title:"Capacitaciones y producción de contenido",plazo:"Continuo",badge:"badge-ok",actors:["Asesor CAD"],norma:"Plan de comunicación CAD",detalle:"El equipo organiza y asiste a charlas orientativas por Zoom, YouTube y presenciales para docentes, profesorados e instituciones. También produce videos tutoriales: investigación, guionado y producción interna.",riesgo:null},
   ],
 };
 
@@ -640,13 +742,17 @@ const autoData = {
     {icon:"📋",name:"Registro centralizado de ingresantes al CA",trigger:"Trigger: actualización de listado de ingresantes",impact:"medio",desc:"Cuando se actualiza el listado de ingresantes al Curso de Ascenso, automatización lo registra en Airtable, notifica a DGPDYND y genera un resumen estructurado para el envío formal.",nodes:["Google Sheets Trigger","Airtable node","Gmail node"]},
   ],
   rrhh: [
-    {icon:"📱",name:"Captación de reclamos WhatsApp/mail de la DG",trigger:"Trigger: mail entrante de dirección de la DG",impact:"alto",desc:"Los pedidos informales de la DG por mail son detectados, registrados automáticamente en Airtable con prioridad alta, y se asigna un responsable con notificación inmediata. Convierte lo informal en trazable.",nodes:["Email Trigger","Airtable node","Slack node","Claude AI node"]},
-    {icon:"📊",name:"Reporte semanal de expedientes por estado",trigger:"Trigger: scheduler semanal (viernes 17hs)",impact:"medio",desc:"automatización genera automáticamente un resumen semanal del estado de todos los expedientes activos (SADE) y lo envía a la coordinación con métricas de tiempo de resolución y alertas de vencimiento.",nodes:["Schedule Trigger","Airtable node","Gmail node","Template node"]},
-    {icon:"🔗",name:"Notificación de EX enviado a otras áreas",trigger:"Trigger: cambio de estado en tabla de expedientes",impact:"medio",desc:"Cuando RRHH/Admin envía un expediente a otra área (DGCLEI, Concursos, Listados), automatización notifica automáticamente al área destinataria con los datos del expediente y el plazo esperado de respuesta.",nodes:["Airtable Trigger","Gmail node","Slack node"]},
+    {icon:"📋",name:"Registro de expedientes con historial de cambios",trigger:"Condición: reemplazar Google Sheets compartido por base con control de versiones",impact:"alto",desc:"Migrar el Sheets de seguimiento de expedientes a una herramienta que registre quién modificó qué y cuándo. Google Sheets ya tiene historial de versiones nativo — basta con activarlo y restringir permisos por columna. Elimina el riesgo de pérdida de datos sin cambiar la herramienta.",cond:"Condición: decisión del equipo de adoptar permisos por rango. No requiere desarrollo."},
+    {icon:"💬",name:"Reemplazar WhatsApp con Junta por Google Chat",trigger:"Condición: la Junta debe tener cuenta de Google Workspace GCBA",impact:"alto",desc:"Google Chat (ya disponible en el Google Workspace del GCBA) permite crear espacios de conversación con historial permanente, búsqueda y archivos adjuntos. Reemplazar WhatsApp por Chat convierte cada intercambio con la Junta en un registro formal vinculable al expediente.",cond:"Condición: ambas partes usan cuentas @bue.edu.ar. No requiere nueva herramienta."},
+    {icon:"🔔",name:"Alerta automática de pico por publicación de listados",trigger:"Trigger: publicación de nuevo listado en COREAP",impact:"medio",desc:"Cuando se publica un listado nuevo, se dispara automáticamente una alerta al equipo de Despacho informando que en los próximos 5 días hábiles aumentará el ingreso de recursos jerárquicos. Permite anticipar la carga en lugar de reaccionar.",cond:"Condición: que la publicación del listado genere un evento detectable (mail de notificación, cambio en Google Sheet, o webhook de COREAP)."},
   ],
   cad: [
-    {icon:"🤖",name:"Bot de pre-atención para consultas FAQ",trigger:"Trigger: mail entrante a cadentuescuela@bue.edu.ar",impact:"alto",desc:"Claude AI analiza el mail del docente y si es una consulta FAQ conocida (puntaje, @BUE, inscripciones, acto público), responde automáticamente con la información correcta. Solo deriva al asesor si la consulta es compleja o el docente sigue sin respuesta.",nodes:["Email Trigger","Claude AI node","Gmail node","Airtable node"]},
-    {icon:"📈",name:"Dashboard de consultas frecuentes",trigger:"Trigger: nuevo registro en formulario de consultas",impact:"medio",desc:"Cada vez que el equipo registra una consulta, automatización la clasifica automáticamente por tipo y actualiza un dashboard en tiempo real con las preguntas más frecuentes. Útil para detectar qué contenido producir en videos.",nodes:["Form Trigger","Claude AI node","Airtable node","Google Sheets node"]},
+    {icon:"🔧",name:"Clasificación automática de mails en la ticketera",trigger:"Condición: acceso a la API o base de datos de la ticketera (app interna de Sistemas)",impact:"alto",desc:"Al ingresar un mail a la ticketera, se analiza el asunto y cuerpo para clasificarlo automáticamente por motivo (Documentación, Acto público, @BUE, etc.) y área del docente. El coordinador ve el mail ya etiquetado y puede asignar con confianza — incluso en modo masivo, porque los casos especiales quedan marcados con una etiqueta diferente.",cond:"Condición: coordinar con el equipo de Sistemas para agregar un campo 'clasificación' a la ticketera y exponer un endpoint o webhook de entrada de mails. Es la integración más estratégica del proyecto."},
+    {icon:"🚨",name:"Detección automática de casos Unidad de Ministro",trigger:"Condición: acceso al mail de entrada o a la ticketera",impact:"alto",desc:"Antes de asignar, se analiza si el mail proviene de un dominio ministerial, menciona a la Ministra, a Rocío, o viene de un hilo de Instagram. Si coincide, se marca automáticamente como 'caso especial' y se excluye de la asignación masiva. El coordinador solo ve los casos especiales separados del flujo general.",cond:"Condición: lista de palabras clave y remitentes a monitorear. Puede implementarse en la ticketera o como paso previo en el flujo de entrada de mails."},
+    {icon:"📬",name:"Acuse de recibo automático al docente",trigger:"Trigger: mail entrante a cadentuescuela@bue.edu.ar",impact:"alto",desc:"Al recibir un mail, el sistema responde automáticamente al docente confirmando que su consulta fue recibida, indicando el número de ticket asignado y el tiempo estimado de respuesta según el volumen actual. Reduce la ansiedad del docente y los mails de seguimiento duplicados.",cond:"Condición: acceso al mail de entrada o a la ticketera. El número de ticket ya existe — solo falta disparar el mail de confirmación."},
+    {icon:"📊",name:"Dashboard de tiempo de espera en Zoom",trigger:"Trigger: API de Zoom + datos del formulario de registro",impact:"alto",desc:"Combinar la API de Zoom (que registra entrada y salida de participantes) con el formulario de registro (que tiene la hora de resolución) para calcular el tiempo promedio de espera en sala. Esto permite al coordinador demostrar con datos cuánto espera la gente y fundamentar la decisión sobre Calendly u otro sistema de turnos.",cond:"Condición: habilitar la API de Zoom con permisos de lectura de participantes. No requiere cambios en el flujo de atención actual."},
+    {icon:"📅",name:"Sistema de turnos para Zoom (evaluación Calendly)",trigger:"Condición: decisión del coordinador de adoptar turnos",impact:"medio",desc:"Calendly permite que el docente reserve un turno en la sala de Zoom sin necesidad de esperar. El asesor asignado recibe el turno en su calendario y el docente recibe una confirmación con el link. Elimina la queja de 'nadie me responde' y genera automáticamente un registro de cada atención.",cond:"Condición: el coordinador debe definir si los turnos son por asesor o por franja horaria del equipo. Calendly tiene integración nativa con Google Calendar (ya en uso en el GCBA)."},
+    {icon:"📈",name:"Reporte semanal automático de consultas por motivo",trigger:"Trigger: Google Sheets (formulario de registro) · cada lunes 9hs",impact:"medio",desc:"Cada lunes, se genera automáticamente un resumen de las consultas de la semana anterior: top motivos, top áreas, volumen por canal y por asesor. Se envía al coordinador y a la Dirección. Reemplaza el armado manual del reporte y permite detectar tendencias (ej: aumento de fallas de SCD para títulos) antes de que exploten.",cond:"Condición: el formulario de Google Sheets ya tiene todos los campos necesarios. No requiere cambios en el sistema de registro."},
   ],
 };
 
@@ -670,7 +776,10 @@ function buildAuto(key) {
   autoData[key].forEach(a=>{
     const d=document.createElement('div');
     d.className='auto-card';
-    d.innerHTML=`<div class="auto-card-top"><div class="auto-icon" style="background:var(--purple-bg)">${a.icon}</div><div class="auto-card-info"><div class="auto-card-name">${a.name}</div><div class="auto-card-trigger">${a.trigger}</div></div><span class="impact-badge impact-${a.impact}">Impacto ${a.impact}</span></div><div class="auto-card-desc">${a.desc}</div><div class="auto-nodes">${a.nodes.map(n=>`<span class="auto-node">${n}</span>`).join('')}</div>`;
+    const bottomRow = a.cond
+      ? `<div class="auto-cond"><span class="auto-cond-label">Condición</span>${a.cond}</div>`
+      : (a.nodes ? `<div class="auto-nodes">${a.nodes.map(n=>`<span class="auto-node">${n}</span>`).join('')}</div>` : '');
+    d.innerHTML=`<div class="auto-card-top"><div class="auto-icon" style="background:var(--purple-bg)">${a.icon}</div><div class="auto-card-info"><div class="auto-card-name">${a.name}</div><div class="auto-card-trigger">${a.trigger}</div></div><span class="impact-badge impact-${a.impact}">Impacto ${a.impact}</span></div><div class="auto-card-desc">${a.desc}</div>${bottomRow}`;
     c.appendChild(d);
   });
 }
