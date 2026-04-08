@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Control · COREAP · Estatuto 2024</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --surface2: #ebebed;
+    --surface3: #e0e0e2;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.14);
+    --text: #1d1d1f;
+    --muted: #86868b;
+    --accent: #0071e3;
+    --accent-light: rgba(0,113,227,0.08);
+    --danger: #ff3b30;
+    --danger-bg: rgba(255,59,48,0.08);
+    --warn: #ff9500;
+    --warn-bg: rgba(255,149,0,0.08);
+    --info: #007aff;
+    --info-bg: rgba(0,122,255,0.08);
+    --ok: #34c759;
+    --ok-bg: rgba(52,199,89,0.08);
+    --purple: #af52de;
+    --purple-bg: rgba(175,82,222,0.08);
+    --neutral-bg: rgba(0,0,0,0.04);
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', monospace;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px; line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  /* HEADER */
+  header { border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; background: rgba(255,255,255,0.88); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); z-index: 100; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 26px; height: 26px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: #fff; letter-spacing: -0.5px; }
+  .logo-text { font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+  .header-right { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* LAYOUT */
+  .app { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 56px); }
+  aside { border-right: 1px solid var(--border); padding: 1.5rem 0; position: sticky; top: 56px; height: calc(100vh - 56px); overflow-y: auto; background: var(--surface); }
+  .aside-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--muted); padding: 0 1.25rem; margin-bottom: 4px; text-transform: uppercase; font-weight: 500; }
+  .nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 1.25rem; cursor: pointer; transition: all 0.1s; border-left: 2px solid transparent; color: var(--muted); font-size: 13px; font-weight: 400; }
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+  .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-light); font-weight: 500; }
+  .nav-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .nav-count { margin-left: auto; font-family: var(--font-mono); font-size: 10px; color: var(--muted); background: var(--surface2); padding: 1px 6px; border-radius: 999px; }
+  .nav-item.active .nav-count { background: rgba(0,113,227,0.12); color: var(--accent); }
+  .aside-divider { height: 1px; background: var(--border); margin: 1rem 1.25rem; }
+  .aside-stats { padding: 0 1.25rem; }
+  .aside-stat { margin-bottom: 1rem; }
+  .aside-stat-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; font-weight: 500; }
+  .aside-stat-val { font-size: 18px; font-weight: 600; color: var(--text); font-family: var(--font-display); letter-spacing: -0.5px; }
+  .aside-stat-sub { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* MAIN */
+  main { padding: 2.5rem; overflow-y: auto; background: var(--bg); }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeIn 0.18s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
+
+  /* SECTION HEADER */
+  .section-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; font-weight: 500; }
+  .section-title { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--text); line-height: 1.15; margin-bottom: 6px; letter-spacing: -0.5px; }
+  .section-desc { font-size: 13px; color: var(--muted); max-width: 520px; line-height: 1.55; }
+
+  /* BACK BUTTON */
+  .back-btn { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-body); font-size: 12px; font-weight: 400; color: var(--accent); background: none; border: 1px solid rgba(0,113,227,0.2); border-radius: 999px; padding: 4px 12px; cursor: pointer; margin-bottom: 1.25rem; transition: all 0.12s; }
+  .back-btn:hover { background: var(--accent-light); border-color: rgba(0,113,227,0.35); }
+  .back-btn svg { width: 11px; height: 11px; }
+
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 2rem; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .stat-card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+  .stat-card-val { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; font-family: var(--font-display); }
+  .stat-card-val.danger { color: var(--danger); }
+  .stat-card-val.warn { color: var(--warn); }
+  .stat-card-val.ok { color: var(--ok); }
+  .stat-card-val.purple { color: var(--purple); }
+
+  /* TABS INSIDE SECTION */
+  .inner-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .inner-tab { padding: 8px 14px; font-size: 11px; font-family: var(--font-mono); cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.12s; letter-spacing: 0.04em; font-weight: 500; text-transform: uppercase; }
+  .inner-tab:hover { color: var(--text); }
+  .inner-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .inner-panel { display: none; }
+  .inner-panel.active { display: block; animation: fadeIn 0.15s ease; }
+
+  /* ETAPAS */
+  .etapas { display: flex; flex-direction: column; gap: 6px; }
+  .etapa { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color 0.12s, box-shadow 0.12s; }
+  .etapa:hover { border-color: var(--border2); box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+  .etapa.open { border-color: rgba(0,113,227,0.25); box-shadow: 0 1px 8px rgba(0,113,227,0.06); }
+  .etapa-header { display: flex; align-items: center; gap: 12px; padding: 13px 16px; cursor: pointer; user-select: none; }
+  .etapa-num { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; font-weight: 600; flex-shrink: 0; }
+  .etapa-title { flex: 1; font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: -0.1px; }
+  .plazo-badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 999px; flex-shrink: 0; font-weight: 500; border: 1px solid transparent; }
+  .badge-danger { background: var(--danger-bg); color: var(--danger); border-color: rgba(255,59,48,0.2); }
+  .badge-warn { background: var(--warn-bg); color: var(--warn); border-color: rgba(255,149,0,0.2); }
+  .badge-info { background: var(--info-bg); color: var(--info); border-color: rgba(0,122,255,0.2); }
+  .badge-ok { background: var(--ok-bg); color: var(--ok); border-color: rgba(52,199,89,0.2); }
+  .badge-neutral { background: var(--neutral-bg); color: var(--muted); }
+  .chevron { color: var(--muted); font-size: 11px; transition: transform 0.18s; flex-shrink: 0; }
+  .etapa.open .chevron { transform: rotate(180deg); }
+  .etapa-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); background: var(--surface); }
+  .etapa.open .etapa-body { display: block; }
+  .etapa-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; margin-bottom: 10px; }
+  .meta-block {}
+  .meta-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 500; }
+  .meta-val { font-size: 11.5px; color: var(--muted); font-family: var(--font-mono); }
+  .actors { display: flex; flex-wrap: wrap; gap: 4px; }
+  .actor { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .etapa-desc { font-size: 13px; color: #515154; line-height: 1.6; }
+  .risk-block { margin-top: 10px; padding: 10px 12px; border-radius: var(--radius); background: var(--danger-bg); border-left: 2px solid var(--danger); font-size: 12px; color: var(--danger); line-height: 1.5; }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1.25rem; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+  .legend-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* SISTEMAS PANEL */
+  .sistemas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .sistema-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .sistema-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; letter-spacing: -0.1px; }
+  .sistema-type { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 500; }
+  .sistema-desc { font-size: 12px; color: #515154; line-height: 1.5; }
+  .sistema-badge { display: inline-block; font-family: var(--font-mono); font-size: 9px; padding: 2px 7px; border-radius: 999px; margin-top: 8px; font-weight: 500; }
+  .sb-api { background: var(--ok-bg); color: var(--ok); }
+  .sb-cerrado { background: var(--danger-bg); color: var(--danger); }
+  .sb-mail { background: var(--info-bg); color: var(--info); }
+  .sb-manual { background: var(--warn-bg); color: var(--warn); }
+  .sb-formulario { background: var(--purple-bg); color: var(--purple); }
+
+  /* AUTOMATIZACION PANEL */
+  .auto-intro { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .auto-intro strong { color: var(--text); font-weight: 500; }
+  .auto-oportunidades { display: flex; flex-direction: column; gap: 8px; }
+  .auto-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; }
+  .auto-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+  .auto-icon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: var(--surface); }
+  .auto-card-info { flex: 1; }
+  .auto-card-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; letter-spacing: -0.1px; }
+  .auto-card-trigger { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+  .impact-badge { font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border-radius: 999px; border: 1px solid transparent; flex-shrink: 0; font-weight: 500; }
+  .impact-alto { background: var(--ok-bg); color: var(--ok); border-color: rgba(52,199,89,0.2); }
+  .impact-medio { background: var(--warn-bg); color: var(--warn); border-color: rgba(255,149,0,0.2); }
+  .auto-card-desc { font-size: 12.5px; color: #515154; line-height: 1.6; margin-bottom: 10px; }
+  .auto-nodes { display: flex; flex-wrap: wrap; gap: 5px; }
+  .auto-node { font-family: var(--font-mono); font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+
+  /* CARGA PANEL */
+  .carga-intro { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 1.25rem; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .carga-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+  .carga-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .carga-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 500; }
+  .carga-val { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 3px; font-family: var(--font-display); letter-spacing: -0.3px; }
+  .carga-sub { font-size: 11px; color: var(--muted); }
+  .carga-bar-wrap { margin-top: 8px; background: var(--surface2); border-radius: 999px; height: 3px; overflow: hidden; }
+  .carga-bar { height: 100%; border-radius: 999px; }
+  .tareas-list { display: flex; flex-direction: column; gap: 5px; }
+  .tarea-row { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); }
+  .tarea-name { flex: 1; font-size: 12.5px; color: var(--text); }
+  .tarea-freq { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+  .tarea-tipo { font-family: var(--font-mono); font-size: 10px; padding: 2px 7px; border-radius: 999px; font-weight: 500; }
+  .tipo-repetitivo { background: var(--warn-bg); color: var(--warn); }
+  .tipo-criterio { background: var(--info-bg); color: var(--info); }
+  .tipo-urgente { background: var(--danger-bg); color: var(--danger); }
+
+  /* OVERVIEW CARDS */
+  .overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
+  .overview-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 18px; cursor: pointer; transition: all 0.12s; }
+  .overview-card:hover { border-color: var(--border2); box-shadow: 0 2px 10px rgba(0,0,0,0.06); transform: translateY(-1px); }
+  .overview-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
+  .overview-card-name { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+  .overview-card-count { font-family: var(--font-mono); font-size: 10px; color: var(--muted); background: var(--surface); padding: 2px 8px; border-radius: 999px; }
+  .overview-card-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+  .overview-risks { display: flex; gap: 5px; flex-wrap: wrap; }
+  .risk-tag { font-size: 10px; padding: 2px 7px; border-radius: 999px; font-family: var(--font-mono); font-weight: 500; }
+  .overview-arrow { margin-top: 12px; font-size: 11px; color: var(--accent); font-family: var(--font-mono); }
+  .critical-section { margin-top: 2rem; }
+  .critical-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; margin-bottom: 1rem; font-weight: 500; }
+  .critical-table { width: 100%; border-collapse: collapse; }
+  .critical-table th { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 500; }
+  .critical-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); font-size: 12.5px; }
+  .critical-table tr:last-child td { border-bottom: none; }
+  .critical-table tr:hover td { background: var(--surface); }
+  .td-coord { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .td-etapa { color: var(--text); font-weight: 500; }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    .app { grid-template-columns: 1fr; }
+    aside { display: none; }
+    main { padding: 1.5rem; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .sistemas-grid { grid-template-columns: 1fr 1fr; }
+    .carga-grid { grid-template-columns: 1fr; }
+    .etapa-meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark">GO</div>
+    <span class="logo-text">COREAP · Panel de Control v2</span>
+  </div>
+  <div class="header-right">Gerencia Operativa de Clasificación y Disciplina Docente</div>
+</header>
+
+<div class="app">
+  <aside>
+    <div class="aside-label">Coordinaciones</div>
+    <div class="nav-item active" data-sec="overview"><div class="nav-dot" style="background:#c8b87a"></div>Vista general</div>
+    <div class="nav-item" data-sec="listados"><div class="nav-dot" style="background:#e06060"></div>Listados<span class="nav-count">10</span></div>
+    <div class="nav-item" data-sec="apel"><div class="nav-dot" style="background:#d4943a"></div>APEL<span class="nav-count">7</span></div>
+    <div class="nav-item" data-sec="concursos"><div class="nav-dot" style="background:#5a9fd4"></div>Concursos<span class="nav-count">8</span></div>
+    <div class="nav-item" data-sec="rrhh"><div class="nav-dot" style="background:#5aaa7a"></div>RRHH / Admin<span class="nav-count">7</span></div>
+    <div class="nav-item" data-sec="cad"><div class="nav-dot" style="background:#9a7ad4"></div>CAD en tu Escuela<span class="nav-count">6</span></div>
+    <div class="aside-divider"></div>
+    <div class="aside-label">Dotación actual</div>
+    <div class="aside-stats">
+      <div class="aside-stat"><div class="aside-stat-label">Listados</div><div class="aside-stat-val">16</div><div class="aside-stat-sub">Analistas de clasificación</div></div>
+      <div class="aside-stat"><div class="aside-stat-label">APEL</div><div class="aside-stat-val">5</div><div class="aside-stat-sub">Analistas de cobertura</div></div>
+      <div class="aside-stat"><div class="aside-stat-label">Concursos</div><div class="aside-stat-val">2</div><div class="aside-stat-sub">Analistas concursales</div></div>
+      <div class="aside-stat"><div class="aside-stat-label">Administración</div><div class="aside-stat-val">3</div><div class="aside-stat-sub">Asistentes administrativos</div></div>
+      <div class="aside-stat"><div class="aside-stat-label">CAD en tu Escuela</div><div class="aside-stat-val">12</div><div class="aside-stat-sub">Asesores de atención</div></div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- OVERVIEW -->
+    <div id="sec-overview" class="section active">
+      <div class="section-header">
+        <div class="section-eyebrow">Vista general</div>
+        <div class="section-title">Panel de Control</div>
+        <div class="section-desc">Mapa completo de procesos, sistemas, carga de trabajo y oportunidades de automatización. Seleccioná una coordinación para ver el detalle.</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-card-label">Total etapas</div><div class="stat-card-val">38</div></div>
+        <div class="stat-card"><div class="stat-card-label">Plazos críticos</div><div class="stat-card-val danger">4</div></div>
+        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">17</div></div>
+        <div class="stat-card"><div class="stat-card-label">Sistemas en uso</div><div class="stat-card-val ok">11</div></div>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card" data-sec="listados">
+          <div class="overview-card-top"><div class="overview-card-name">📋 Listados</div><div class="overview-card-count">16 personas · 10 etapas · 5 auto</div></div>
+          <div class="overview-card-desc">Validación documental, cálculo y exhibición de listados. Reconsideraciones y recursos jerárquicos.</div>
+          <div class="overview-risks"><span class="risk-tag badge-danger">3 días reconsideración</span><span class="risk-tag badge-warn">5 días exhibición</span></div>
+          <div class="overview-arrow">Ver coordinación →</div>
+        </div>
+        <div class="overview-card" data-sec="apel">
+          <div class="overview-card-top"><div class="overview-card-name">⚡ APEL</div><div class="overview-card-count">5 personas · 7 etapas · 4 auto</div></div>
+          <div class="overview-card-desc">Actos públicos en línea. Configuración de vacantes, postulaciones y designaciones.</div>
+          <div class="overview-risks"><span class="risk-tag badge-danger">24 hs remanentes</span><span class="risk-tag badge-warn">Incidencias en tiempo real</span></div>
+          <div class="overview-arrow">Ver coordinación →</div>
+        </div>
+        <div class="overview-card" data-sec="concursos">
+          <div class="overview-card-top"><div class="overview-card-name">🏆 Concursos</div><div class="overview-card-count">2 personas · 8 etapas · 3 auto</div></div>
+          <div class="overview-card-desc">Curso y concurso de ascenso, traslados y concursos de base.</div>
+          <div class="overview-risks"><span class="risk-tag badge-warn">Elección jurados obligatoria</span></div>
+          <div class="overview-arrow">Ver coordinación →</div>
+        </div>
+        <div class="overview-card" data-sec="rrhh">
+          <div class="overview-card-top"><div class="overview-card-name">📂 RRHH / Admin</div><div class="overview-card-count">3 personas · 7 etapas · 3 auto</div></div>
+          <div class="overview-card-desc">Expedientes SADE, altas y bajas, licencias, salario familiar y proyectos de resolución.</div>
+          <div class="overview-risks"><span class="risk-tag badge-warn">10 días reconsideración</span></div>
+          <div class="overview-arrow">Ver coordinación →</div>
+        </div>
+        <div class="overview-card" data-sec="cad">
+          <div class="overview-card-top"><div class="overview-card-name">🎓 CAD en tu Escuela</div><div class="overview-card-count">12 personas · 6 etapas · 2 auto</div></div>
+          <div class="overview-card-desc">Atención de consultas docentes por ZOOM y mail. Derivación y resolución en tiempo real.</div>
+          <div class="overview-risks"><span class="risk-tag badge-danger">Resolución en tiempo real</span><span class="risk-tag badge-danger">Derivación inmediata</span></div>
+          <div class="overview-arrow">Ver coordinación →</div>
+        </div>
+      </div>
+      <div class="critical-section">
+        <div class="critical-title">Plazos críticos del sistema</div>
+        <table class="critical-table">
+          <thead><tr><th>Coordinación</th><th>Etapa</th><th>Plazo</th><th>Norma</th></tr></thead>
+          <tbody>
+            <tr><td class="td-coord">Listados</td><td class="td-etapa">Exhibición y reconsideración del listado provisorio</td><td><span class="plazo-badge badge-danger">5 días hábiles combinados</span></td><td class="td-coord">Art. 49 E.D. 2024</td></tr>
+            <tr><td class="td-coord">APEL</td><td class="td-etapa">Remanentes post-acto público</td><td><span class="plazo-badge badge-danger">24 horas</span></td><td class="td-coord">Instructivo APEL</td></tr>
+            <tr><td class="td-coord">CAD</td><td class="td-etapa">Diagnóstico de consulta en vivo</td><td><span class="plazo-badge badge-danger">Tiempo real</span></td><td class="td-coord">Instructivo CAD</td></tr>
+            <tr><td class="td-coord">CAD</td><td class="td-etapa">Derivación interna a coordinadores</td><td><span class="plazo-badge badge-danger">Inmediata</span></td><td class="td-coord">Instructivo CAD</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LISTADOS -->
+    <div id="sec-listados" class="section">
+      <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
+      <div class="section-header">
+        <div class="section-eyebrow">Coordinación 01</div>
+        <div class="section-title">Listados</div>
+        <div class="section-desc">Validación documental, cálculo, exhibición y gestión de listados por orden de mérito. 16 analistas.</div>
+      </div>
+      <div class="inner-tabs">
+        <div class="inner-tab active" data-sec="listados" data-inner="etapas">ETAPAS Y PLAZOS</div>
+        <div class="inner-tab" data-sec="listados" data-inner="sistemas">SISTEMAS</div>
+        <div class="inner-tab" data-sec="listados" data-inner="carga">CARGA DE TRABAJO</div>
+        <div class="inner-tab" data-sec="listados" data-inner="auto">AUTOMATIZACIÓN</div>
+      </div>
+      <div id="listados-etapas" class="inner-panel active">
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Crítico (≤3 días)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--info)"></div>Largo</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div>
+        </div>
+        <div class="etapas" id="etapas-listados"></div>
+      </div>
+      <div id="listados-sistemas" class="inner-panel">
+        <div class="sistemas-grid">
+          <div class="sistema-card"><div class="sistema-name">SCD</div><div class="sistema-type">Sistema de Clasificación Docente</div><div class="sistema-desc">Carga y gestión del puntaje, títulos, cursos y documentación docente. Núcleo del proceso de listados.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Correo electrónico</div><div class="sistema-type">Canal de entrada principal</div><div class="sistema-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f796e63666b6e6c666061217c6c6b4f6d7a6a216a6b7a216e7d">[email&#160;protected]</a> recibe documentación de docentes. También pedidos personalizados y comunicaciones internas.</div><span class="sistema-badge sb-mail">Mail institucional</span></div>
+          <div class="sistema-card"><div class="sistema-name">SADE</div><div class="sistema-type">Sistema de admin. de documentos</div><div class="sistema-desc">Generación de memos, comunicaciones oficiales y expedientes para recursos jerárquicos.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Boletín Oficial CABA</div><div class="sistema-type">Canal de publicación legal</div><div class="sistema-desc">Publicación obligatoria de fechas de exhibición de listados según Art. 13 reglamentado.</div><span class="sistema-badge sb-cerrado">Externo / publicación</span></div>
+          <div class="sistema-card"><div class="sistema-name">Planillas / Excel</div><div class="sistema-type">Gestión manual</div><div class="sistema-desc">Seguimiento de reclamos, control de plazos y registro de reconsideraciones. Sin sistema centralizado.</div><span class="sistema-badge sb-manual">Manual / sin integración</span></div>
+          <div class="sistema-card"><div class="sistema-name">APEL (plataforma)</div><div class="sistema-type">Destino final del listado</div><div class="sistema-desc">Una vez vigente el listado, se usa en APEL para habilitar las postulaciones de docentes a cargos.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+        </div>
+      </div>
+      <div id="listados-carga" class="inner-panel">
+        <div class="carga-intro">Estimaciones basadas en la estructura del proceso y dotación declarada. Los datos exactos requieren relevamiento interno con los equipos.</div>
+        <div class="carga-grid">
+          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val">16</div><div class="carga-sub">Analistas de reclamos y clasificación</div></div>
+          <div class="carga-card"><div class="carga-label">Pico de trabajo</div><div class="carga-val" style="color:var(--danger)">Exhibición + reconsideraciones</div><div class="carga-sub">3 días hábiles de presión máxima</div></div>
+          <div class="carga-card"><div class="carga-label">Tarea más repetitiva</div><div class="carga-val" style="font-size:15px">Validación de docs</div><div class="carga-sub">Alta frecuencia, baja variabilidad</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:85%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Tarea de mayor criterio</div><div class="carga-val" style="font-size:15px">Análisis de reclamos</div><div class="carga-sub">Requiere interpretación normativa</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:60%;background:var(--info)"></div></div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="tareas-list">
+          <div class="tarea-row"><div class="tarea-name">Lectura y clasificación de mails entrantes</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Confirmación de recepción de documentación a docentes</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Control de plazos de exhibición y reconsideración</div><div class="tarea-freq">Por proceso</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Análisis y resolución de reclamos de puntaje</div><div class="tarea-freq">Por proceso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Solicitud de memos TP/IN a DGPDYND</div><div class="tarea-freq">Por proceso</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Carga de cursos en SCD (nomenclatura + puntaje)</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Confección de memos para recursos jerárquicos</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+        </div>
+      </div>
+      <div id="listados-auto" class="inner-panel">
+        <div class="auto-intro"><strong>Principio clave:</strong> automatización actúa en los bordes del proceso, no en el núcleo. Las tareas que requieren criterio (analizar un reclamo, aprobar documentación) siguen siendo humanas. La automatización captura, notifica, registra y deriva — liberando tiempo analítico.</div>
+        <div class="auto-oportunidades" id="auto-listados"></div>
+      </div>
+    </div>
+
+    <!-- APEL -->
+    <div id="sec-apel" class="section">
+      <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
+      <div class="section-header">
+        <div class="section-eyebrow">Coordinación 02</div>
+        <div class="section-title">APEL</div>
+        <div class="section-desc">Sistema de actos públicos en línea. Configuración de vacantes, gestión de postulaciones y soporte técnico. 5 analistas.</div>
+      </div>
+      <div class="inner-tabs">
+        <div class="inner-tab active" data-sec="apel" data-inner="etapas">ETAPAS Y PLAZOS</div>
+        <div class="inner-tab" data-sec="apel" data-inner="sistemas">SISTEMAS</div>
+        <div class="inner-tab" data-sec="apel" data-inner="carga">CARGA DE TRABAJO</div>
+        <div class="inner-tab" data-sec="apel" data-inner="auto">AUTOMATIZACIÓN</div>
+      </div>
+      <div id="apel-etapas" class="inner-panel active">
+        <div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Crítico</div><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div>
+        <div class="etapas" id="etapas-apel"></div>
+      </div>
+      <div id="apel-sistemas" class="inner-panel">
+        <div class="sistemas-grid">
+          <div class="sistema-card"><div class="sistema-name">APEL (plataforma)</div><div class="sistema-type">actopublico.bue.edu.ar</div><div class="sistema-desc">Plataforma central de postulaciones. Actos públicos, concursos, consultas y comunicaciones por área.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">COREAP / SCD</div><div class="sistema-type">Backend de clasificación</div><div class="sistema-desc">Base de datos de listados y documentación docente. Se integra con APEL para validar elegibilidad de postulantes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Sistemas 1 / DGPDYND</div><div class="sistema-type">Sistema de designaciones</div><div class="sistema-desc">Impacto de designaciones. Verificación de requisitos estatutarios. Generación de Formulario T.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Portal @BUE</div><div class="sistema-type">Gestión de cuentas docentes</div><div class="sistema-desc">Creación, habilitación y modificación de cuentas @BUE. Cambio de correo alternativo, CUIL y blanqueo.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Excel / planillas</div><div class="sistema-type">Seguimiento manual</div><div class="sistema-desc">Área de designaciones (descarga y envío a Concursos por Excel). Seguimiento de incidencias en tiempo real.</div><span class="sistema-badge sb-manual">Manual / sin integración</span></div>
+          <div class="sistema-card"><div class="sistema-name">Correo / formularios</div><div class="sistema-type">Soporte y creación @BUE</div><div class="sistema-desc">Solicitudes de cuentas @BUE, soporte a docentes y comunicación con otras coordinaciones.</div><span class="sistema-badge sb-mail">Mail institucional</span></div>
+        </div>
+      </div>
+      <div id="apel-carga" class="inner-panel">
+        <div class="carga-intro">APEL tiene el ratio personas/impacto más crítico: 5 personas gestionan actos públicos que afectan a miles de docentes simultáneamente.</div>
+        <div class="carga-grid">
+          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val">5</div><div class="carga-sub">Analistas de cobertura y vacantes</div></div>
+          <div class="carga-card"><div class="carga-label">Pico de trabajo</div><div class="carga-val" style="color:var(--danger)">Durante el acto público</div><div class="carga-sub">Incidencias en tiempo real con docentes conectados</div></div>
+          <div class="carga-card"><div class="carga-label">Ventana más crítica</div><div class="carga-val" style="font-size:15px">Remanentes</div><div class="carga-sub">24 hs post-cierre del acto</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:95%;background:var(--danger)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Tarea más repetitiva</div><div class="carga-val" style="font-size:15px">Creación cuentas @BUE</div><div class="carga-sub">Alta frecuencia, proceso estandarizado</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:75%;background:var(--warn)"></div></div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="tareas-list">
+          <div class="tarea-row"><div class="tarea-name">Creación y habilitación de cuentas @BUE</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Codificación y carga de vacantes en APEL</div><div class="tarea-freq">Por acto</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Resolución de incidencias en tiempo real</div><div class="tarea-freq">Durante acto</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Protocolo de ratificación ante errores</div><div class="tarea-freq">Eventual</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Descarga y envío de designaciones a Concursos</div><div class="tarea-freq">Post-acto</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Configuración de reglas de asignación por área</div><div class="tarea-freq">Por proceso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Comunicados APEL a docentes</div><div class="tarea-freq">Por acto</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+        </div>
+      </div>
+      <div id="apel-auto" class="inner-panel">
+        <div class="auto-intro"><strong>Contexto clave:</strong> APEL y los sistemas GCBA son cerrados — no tienen API pública. La automatización opera sobre lo que rodea a estos sistemas: mails, formularios, notificaciones y registros de seguimiento.</div>
+        <div class="auto-oportunidades" id="auto-apel"></div>
+      </div>
+    </div>
+
+    <!-- CONCURSOS -->
+    <div id="sec-concursos" class="section">
+      <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
+      <div class="section-header">
+        <div class="section-eyebrow">Coordinación 03</div>
+        <div class="section-title">Concursos</div>
+        <div class="section-desc">Curso y concurso de ascenso, traslados y concursos de base. Coordinación con Juntas, DGPDYND y Escuela de Maestros. 2 analistas.</div>
+      </div>
+      <div class="inner-tabs">
+        <div class="inner-tab active" data-sec="concursos" data-inner="etapas">ETAPAS Y PLAZOS</div>
+        <div class="inner-tab" data-sec="concursos" data-inner="sistemas">SISTEMAS</div>
+        <div class="inner-tab" data-sec="concursos" data-inner="carga">CARGA DE TRABAJO</div>
+        <div class="inner-tab" data-sec="concursos" data-inner="auto">AUTOMATIZACIÓN</div>
+      </div>
+      <div id="concursos-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-concursos"></div></div>
+      <div id="concursos-sistemas" class="inner-panel">
+        <div class="sistemas-grid">
+          <div class="sistema-card"><div class="sistema-name">APEL (módulo Concursos)</div><div class="sistema-type">Postulaciones y votación</div><div class="sistema-desc">Postulación docente a concursos, elección de jurados y gestión de vacantes por área y cargo.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">SADE</div><div class="sistema-type">Convocatorias y expedientes</div><div class="sistema-desc">Confección de notas de convocatoria (CCOO), expedientes de designación, informes gráficos y rectificaciones.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Sistemas 1 / DGPDYND</div><div class="sistema-type">Carga de designaciones</div><div class="sistema-desc">Impacto de designaciones de concursos. Verificación de requisitos estatutarios. Generación de expedientes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Escuela de Maestros</div><div class="sistema-type">Exámenes de oposición</div><div class="sistema-desc">Coordinación física del examen. Veedores presenciales. Recepción y envío de notas a la coordinación.</div><span class="sistema-badge sb-manual">Coordinación externa</span></div>
+          <div class="sistema-card"><div class="sistema-name">Planillas / Excel</div><div class="sistema-type">Seguimiento y listas</div><div class="sistema-desc">Listados de ingresantes al CA, seguimiento de cupos, organización de jurados por área y cargo.</div><span class="sistema-badge sb-manual">Manual / sin integración</span></div>
+          <div class="sistema-card"><div class="sistema-name">Correo institucional</div><div class="sistema-type">Coordinación multi-actor</div><div class="sistema-desc">Comunicación con Juntas, DGPDYND, Escuela de Maestros y docentes. Sin sistema centralizado.</div><span class="sistema-badge sb-mail">Mail institucional</span></div>
+        </div>
+      </div>
+      <div id="concursos-carga" class="inner-panel">
+        <div class="carga-intro">Concursos tiene el ratio más crítico del área: 2 personas gestionan un proceso multietapa que involucra docenas de actores externos y plazos normativos estrictos.</div>
+        <div class="carga-grid">
+          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val" style="color:var(--danger)">2</div><div class="carga-sub">Analistas de procesos concursales</div></div>
+          <div class="carga-card"><div class="carga-label">Actores externos coordinados</div><div class="carga-val">6+</div><div class="carga-sub">Juntas, DGPDYND, Escuela de Maestros, docentes, jurados, APEL</div></div>
+          <div class="carga-card"><div class="carga-label">Mayor complejidad</div><div class="carga-val" style="font-size:15px">Coordinación multi-actor</div><div class="carga-sub">Cada actor tiene su propio sistema y canal</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Tarea más repetitiva</div><div class="carga-val" style="font-size:15px">Carga en Sistemas 1</div><div class="carga-sub">Designaciones, expedientes, informes gráficos</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:70%;background:var(--warn)"></div></div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="tareas-list">
+          <div class="tarea-row"><div class="tarea-name">Organización de vacantes por área y cargo para APEL</div><div class="tarea-freq">Por concurso</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Confección de CCO y notas de convocatoria en SADE</div><div class="tarea-freq">Por concurso</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Carga de designaciones en Sistemas 1</div><div class="tarea-freq">Post-concurso</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Coordinación con Escuela de Maestros (veedores)</div><div class="tarea-freq">Por examen</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Análisis de reclamos e impugnaciones</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Seguimiento de plazos del cronograma general</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+        </div>
+      </div>
+      <div id="concursos-auto" class="inner-panel">
+        <div class="auto-intro"><strong>Foco principal:</strong> Con solo 2 personas coordinando 6+ actores externos, el mayor ahorro viene de automatizar la comunicación entre partes y el seguimiento de plazos del cronograma.</div>
+        <div class="auto-oportunidades" id="auto-concursos"></div>
+      </div>
+    </div>
+
+    <!-- RRHH -->
+    <div id="sec-rrhh" class="section">
+      <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
+      <div class="section-header">
+        <div class="section-eyebrow">Coordinación 04</div>
+        <div class="section-title">RRHH / Administración</div>
+        <div class="section-desc">Gestión de expedientes SADE, altas y bajas de agentes, licencias y proyectos de resolución. 3 asistentes administrativos.</div>
+      </div>
+      <div class="inner-tabs">
+        <div class="inner-tab active" data-sec="rrhh" data-inner="etapas">ETAPAS Y PLAZOS</div>
+        <div class="inner-tab" data-sec="rrhh" data-inner="sistemas">SISTEMAS</div>
+        <div class="inner-tab" data-sec="rrhh" data-inner="carga">CARGA DE TRABAJO</div>
+        <div class="inner-tab" data-sec="rrhh" data-inner="auto">AUTOMATIZACIÓN</div>
+      </div>
+      <div id="rrhh-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-rrhh"></div></div>
+      <div id="rrhh-sistemas" class="inner-panel">
+        <div class="sistemas-grid">
+          <div class="sistema-card"><div class="sistema-name">SADE</div><div class="sistema-type">Sistema central de expedientes</div><div class="sistema-desc">Generación de EX, IF en GEDO, CCOO. Toda la tramitación formal de recursos, licencias y designaciones pasa por SADE.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">SIAL</div><div class="sistema-type">Control de presentismo</div><div class="sistema-desc">Carga de Comisiones de Servicios, control de fichadas, distribución de horarios y lugar de trabajo.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">MIA</div><div class="sistema-type">Gestión de licencias</div><div class="sistema-desc">Aplicativo para carga y control de licencias docentes. Generación de tickets por fallas frecuentes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">SASUM</div><div class="sistema-type">Contratos LOYS</div><div class="sistema-desc">DGCDO carga información de contratos LOYS. RRHH genera EX de vinculación a partir de esta carga.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">G-FAMA</div><div class="sistema-type">Salario familiar docente</div><div class="sistema-desc">Sistema de DGPDYND para tramitación del salario familiar de docentes.</div><span class="sistema-badge sb-cerrado">Sistema cerrado GCBA</span></div>
+          <div class="sistema-card"><div class="sistema-name">Correo / WhatsApp</div><div class="sistema-type">Reclamos y consultas DG</div><div class="sistema-desc">Solicitudes de la Dirección General vía correo electrónico y WhatsApp. Canal informal pero de alta prioridad.</div><span class="sistema-badge sb-mail">Informal / sin registro</span></div>
+        </div>
+      </div>
+      <div id="rrhh-carga" class="inner-panel">
+        <div class="carga-intro">RRHH/Admin es la coordinación transversal: recibe work-in de todas las demás coordinaciones y múltiples sistemas del GCBA. 3 personas gestionan todo.</div>
+        <div class="carga-grid">
+          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val" style="color:var(--danger)">3</div><div class="carga-sub">Asistentes administrativos</div></div>
+          <div class="carga-card"><div class="carga-label">Sistemas que operan</div><div class="carga-val">6</div><div class="carga-sub">SADE, SIAL, MIA, SASUM, G-FAMA, GEDO</div></div>
+          <div class="carga-card"><div class="carga-label">Mayor dispersión</div><div class="carga-val" style="font-size:15px">Multi-sistema</div><div class="carga-sub">Cada trámite usa sistemas distintos</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Canal más informal</div><div class="carga-val" style="font-size:15px">WhatsApp DG</div><div class="carga-sub">Alta prioridad, sin registro formal</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:65%;background:var(--warn)"></div></div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="tareas-list">
+          <div class="tarea-row"><div class="tarea-name">Clasificación y distribución de expedientes SADE</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Generación de EX, IF y CCOO en SADE/GEDO</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Control de fichadas y presentismo en SIAL</div><div class="tarea-freq">Diario</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Gestión de licencias en MIA</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Reclamos vía WhatsApp/mail de la DG</div><div class="tarea-freq">Variable</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Análisis y revisión de expedientes con otras coordinaciones</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Alta de contratos TD, HC, LOYS y vocalías</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+        </div>
+      </div>
+      <div id="rrhh-auto" class="inner-panel">
+        <div class="auto-intro"><strong>Punto de partida recomendado:</strong> El canal WhatsApp/mail de la DG es informal y no tiene registro. Automatizar su captación y derivación es el quick-win más inmediato y de menor resistencia política.</div>
+        <div class="auto-oportunidades" id="auto-rrhh"></div>
+      </div>
+    </div>
+
+    <!-- CAD -->
+    <div id="sec-cad" class="section">
+      <button class="back-btn" data-sec="overview"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2L4 6l4 4"/></svg>Volver al menú principal</button>
+      <div class="section-header">
+        <div class="section-eyebrow">Coordinación 05</div>
+        <div class="section-title">CAD en tu Escuela</div>
+        <div class="section-desc">Atención de consultas docentes por ZOOM y mail. Derivación interna y producción de contenido. 12 asesores.</div>
+      </div>
+      <div class="inner-tabs">
+        <div class="inner-tab active" data-sec="cad" data-inner="etapas">ETAPAS Y PLAZOS</div>
+        <div class="inner-tab" data-sec="cad" data-inner="sistemas">SISTEMAS</div>
+        <div class="inner-tab" data-sec="cad" data-inner="carga">CARGA DE TRABAJO</div>
+        <div class="inner-tab" data-sec="cad" data-inner="auto">AUTOMATIZACIÓN</div>
+      </div>
+      <div id="cad-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Crítico</div><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-cad"></div></div>
+      <div id="cad-sistemas" class="inner-panel">
+        <div class="sistemas-grid">
+          <div class="sistema-card"><div class="sistema-name">Zoom</div><div class="sistema-type">Canal de atención en vivo</div><div class="sistema-desc">Sala permanente con administrador general que deriva a operadores. Comparte pantalla para acompañar gestiones.</div><span class="sistema-badge sb-api">API disponible</span></div>
+          <div class="sistema-card"><div class="sistema-name">Correo electrónico</div><div class="sistema-type">Canal de entrada alternativo</div><div class="sistema-desc"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="32515356575c464757415147575e53725047571c5756471c5340">[email&#160;protected]</a> recibe consultas. El operador las gestiona desde la ticketera asignada.</div><span class="sistema-badge sb-mail">Mail institucional</span></div>
+          <div class="sistema-card"><div class="sistema-name">Formulario de registro</div><div class="sistema-type">Registro de consultas</div><div class="sistema-desc">Formulario donde se registra cada consulta atendida. Sin integración automática con ningún sistema.</div><span class="sistema-badge sb-formulario">Google Forms / similar</span></div>
+          <div class="sistema-card"><div class="sistema-name">Ticketera</div><div class="sistema-type">Asignación de consultas</div><div class="sistema-desc">Sistema donde aparecen las consultas asignadas a cada operador. Vinculado al canal de mail.</div><span class="sistema-badge sb-cerrado">Sistema interno</span></div>
+          <div class="sistema-card"><div class="sistema-name">APEL / SCD / SADE</div><div class="sistema-type">Sistemas consultados</div><div class="sistema-desc">Los asesores consultan estos sistemas para resolver dudas de docentes sobre puntaje, postulaciones y trámites.</div><span class="sistema-badge sb-cerrado">Solo lectura</span></div>
+          <div class="sistema-card"><div class="sistema-name">RRSS / YouTube</div><div class="sistema-type">Difusión de contenido</div><div class="sistema-desc">Publicación de videos tutoriales y contenido educativo. Producción interna del equipo CAD.</div><span class="sistema-badge sb-api">API disponible</span></div>
+        </div>
+      </div>
+      <div id="cad-carga" class="inner-panel">
+        <div class="carga-intro">CAD tiene la mayor dotación (12 personas) pero enfrenta el mayor volumen de interacción directa con docentes. La presión es continua durante el horario de atención.</div>
+        <div class="carga-grid">
+          <div class="carga-card"><div class="carga-label">Personas en el equipo</div><div class="carga-val ok">12</div><div class="carga-sub">Asesores de atención y consultas</div></div>
+          <div class="carga-card"><div class="carga-label">Horario pico</div><div class="carga-val" style="font-size:15px">Lunes 10–20hs</div><div class="carga-sub">Jornada más larga de la semana</div></div>
+          <div class="carga-card"><div class="carga-label">Mayor repetición</div><div class="carga-val" style="font-size:15px">Consultas tipo FAQ</div><div class="carga-sub">Puntaje, @BUE, inscripciones, acto público</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:80%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Punto más crítico</div><div class="carga-val" style="font-size:15px">Derivación en vivo</div><div class="carga-sub">Requiere coordinador disponible al instante</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:90%;background:var(--danger)"></div></div></div>
+        </div>
+        <div class="critical-title" style="margin-bottom:12px">Inventario de tareas por tipo</div>
+        <div class="tareas-list">
+          <div class="tarea-row"><div class="tarea-name">Respuesta a consultas FAQ (puntaje, @BUE, inscripciones)</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Derivación interna de consultas complejas</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-urgente">urgente</div></div>
+          <div class="tarea-row"><div class="tarea-name">Registro de consultas en formulario</div><div class="tarea-freq">Continuo</div><div class="tarea-tipo tipo-repetitivo">repetitivo</div></div>
+          <div class="tarea-row"><div class="tarea-name">Actualización de materiales normativos</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Producción de videos tutoriales</div><div class="tarea-freq">Periódico</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+          <div class="tarea-row"><div class="tarea-name">Resolución de reclamos particulares</div><div class="tarea-freq">Por caso</div><div class="tarea-tipo tipo-criterio">requiere criterio</div></div>
+        </div>
+      </div>
+      <div id="cad-auto" class="inner-panel">
+        <div class="auto-intro"><strong>Mayor oportunidad:</strong> Un alto porcentaje de las consultas son preguntas frecuentes (FAQ) con respuestas estandarizadas. Un bot de pre-atención reduciría la carga en vivo y reservaría el tiempo del asesor para casos que realmente requieren criterio.</div>
+        <div class="auto-oportunidades" id="auto-cad"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const etapasData = {
+  listados: [
+    {num:1,title:"Recepción y validación de documentación",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Listados","Docente"],norma:"Art. 13 E.D. + SCD",detalle:"El docente envía documentación a validacion.scd@bue.edu.ar. El equipo analiza y aprueba o rechaza. Si falta algo, queda pendiente para carga posterior.",riesgo:null},
+    {num:2,title:"Cálculo de listados (Sistemas)",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Sistemas","DGPDYND","Analista Listados"],norma:"Art. 12 E.D. 2024 (ex Art. 13)",detalle:"Genera tres tipos: Titulares, Ingreso e Interinatos y Suplencias. El equipo revisa el resultado antes de proceder a exhibición.",riesgo:"⚠️ Punto de falla: errores en el cálculo requieren corrección manual urgente antes de publicar."},
+    {num:3,title:"Confección y corrección del listado provisorio",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Listados","Sistemas"],norma:"Art. 12 E.D. 2024 (ex Art. 13)",detalle:"Revisión y corrección de errores internos antes de publicar. Se solicitan memos TP/IN a DGPDYND cuando corresponde.",riesgo:"⚠️ Errores no detectados aquí escalan a recursos jerárquicos que demoran hasta 60 días."},
+    {num:4,title:"Exhibición del listado provisorio",plazo:"Mín. 5 días hábiles",badge:"badge-warn",actors:["Juntas de Clasificación","Distritos Escolares"],norma:"Art. 12 reglamentado · Decreto 179/21",detalle:"Publicación en sede de Junta, Distritos, establecimientos, web y Boletín Oficial. A partir del último día comienza el plazo de reconsideración.",riesgo:null},
+    {num:5,title:"Exhibición y reconsideración del listado provisorio",plazo:"5 días hábiles (combinado)",badge:"badge-danger",actors:["Docente","Junta de Clasificación","Analista Listados"],norma:"Art. 49 E.D. 2024 (ex Art. 50)",detalle:"El docente tiene 3 días hábiles para recurrir. La Junta debe expedirse dentro del mismo plazo.",riesgo:"⚠️ Plazo más crítico del sistema. La Junta debe resolver en los mismos 3 días que el docente tiene para reclamar."},
+    {num:6,title:"Confección del listado definitivo",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Listados","Junta de Clasificación"],norma:"Art. 12 reglamentado · Decreto 179/21",detalle:"Con reconsideraciones resueltas se confecciona el listado definitivo por Orden de Mérito con validez legal.",riesgo:null},
+    {num:7,title:"Exhibición del listado definitivo",plazo:"Mín. 5 días hábiles",badge:"badge-warn",actors:["Juntas de Clasificación","Distritos Escolares"],norma:"Art. 12 reglamentado · Decreto 179/21",detalle:"Exhibición del listado definitivo. A partir del día siguiente comienzan los plazos para recursos formales (Arts. 50–58 E.D. 2024).",riesgo:null},
+    {num:8,title:"Puesta en vigencia y memos",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","Analista Listados","DG"],norma:"Art. 12 E.D. 2024 (ex Art. 13)",detalle:"Generación de memos para firma. Resolución formal. Gestión de recursos jerárquicos vía RRHH/Admin.",riesgo:null},
+    {num:9,title:"Recursos jerárquicos (si corresponde)",plazo:"10 días hábiles para interponer · 60 días para resolver",badge:"badge-info",actors:["Docente","RRHH / Admin","Jefatura de Gobierno","Procuración General"],norma:"Arts. 55–58 E.D. 2024 (ex Arts. 56–59)",detalle:"El docente tiene 10 días hábiles desde notificado para interponer recurso jerárquico (Art. 56 E.D. 2024). La autoridad tiene 60 días para resolver desde recepción en Jefatura de Gobierno (Art. 57). Requiere dictamen de Procuración General (Art. 58).",riesgo:"Proceso que puede demorar más de 2 meses. Gestionado por RRHH/Admin."},
+    {num:10,title:"Acto público para postulaciones",plazo:"Según cronograma APEL",badge:"badge-neutral",actors:["APEL","Docente","Analista Listados"],norma:"Art. 7c E.D. 2024",detalle:"Con el listado vigente se habilita el acto público en APEL para elección de cargos por orden de puntaje.",riesgo:null},
+  ],
+  apel: [
+    {num:1,title:"Recepción de vacantes desde DGPDYND",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["DGPDYND","Analista APEL"],norma:"Flujo interno COREAP",detalle:"Las vacantes se reciben desde Sistemas 1 vía DGPDYND. El equipo APEL comienza el acondicionamiento.",riesgo:null},
+    {num:2,title:"Acondicionamiento de vacantes",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista APEL"],norma:"Flujo interno COREAP",detalle:"Control de CAE, verificación de prioridad y turnos. Organización por área y cargo para carga en APEL.",riesgo:"⚠️ Errores en codificación generan vacantes incorrectas en el acto público y activan protocolo de ratificación."},
+    {num:3,title:"Configuración en APEL y publicación",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista APEL"],norma:"Instructivo APEL",detalle:"Carga de vacantes con código, descripción horaria e ID. Generación de comunicados APEL para docentes.",riesgo:null},
+    {num:4,title:"Acto público en línea",plazo:"Según cronograma publicado",badge:"badge-warn",actors:["Docente","Analista APEL","Junta de Clasificación"],norma:"Art. 65L E.D. · Instructivo APEL",detalle:"Postulaciones por orden de mérito. Módulo de consultas disponible durante el acto y 24hs posteriores. Art. 65L para docentes sin listado vigente.",riesgo:"⚠️ Incidencias en tiempo real activan protocolo de ratificación de forma inmediata."},
+    {num:5,title:"Remanentes (24 hs post-cierre)",plazo:"24 horas",badge:"badge-danger",actors:["Docente","Analista APEL"],norma:"Instructivo APEL",detalle:"Cargos no asignados disponibles como remanentes durante 24hs. Pasado ese tiempo se pierde la oportunidad.",riesgo:"⚠️ Ventana de tiempo muy corta. Alta presión para docentes y para el equipo de soporte."},
+    {num:6,title:"Designaciones y cierre de actos",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista APEL","DGPDYND"],norma:"Flujo interno COREAP",detalle:"Integración en Formulario T. Descarga de designaciones para Concursos. Verificación DGPDYND.",riesgo:null},
+    {num:7,title:"Creación y gestión de cuentas @BUE",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista APEL","Docente"],norma:"Instructivo APEL · Creación cuentas",detalle:"Solicitud vía formulario o mail. Si no existe: análisis de documentación, creación en portal, alta masiva en APEL y carga manual en SCD.",riesgo:null},
+  ],
+  concursos: [
+    {num:1,title:"Recepción de vacantes y planificación",plazo:"Mensual",badge:"badge-ok",actors:["DGPDYND","Analista Concursos"],norma:"Art. 28 E.D. 2024",detalle:"Recepción mensual de vacantes provisorias. Organización del curso de ascenso por tramos. Estimación de cupos.",riesgo:null},
+    {num:2,title:"Convocatoria al curso de ascenso",plazo:"30 días corridos",badge:"badge-warn",actors:["Analista Concursos","Junta de Clasificación"],norma:"Art. 28 E.D. 2024",detalle:"Confección de notas de convocatoria en SADE. Publicación de cargos en APEL. Recopilación de ingresantes.",riesgo:null},
+    {num:3,title:"Postulación de docentes vía APEL",plazo:"Según cronograma",badge:"badge-warn",actors:["Docente","Analista APEL","Analista Concursos"],norma:"Instructivo APEL · Concursos",detalle:"Organización por área y cargo. Carga en APEL para habilitar postulaciones. Designación por Juntas.",riesgo:null},
+    {num:4,title:"Elección de jurados",plazo:"Plazo publicado en comunicado",badge:"badge-warn",actors:["Docente","Analista APEL","COREAP"],norma:"Art. 28c E.D. 2024 · Instructivo Jurados",detalle:"Obligatorio para quienes aprobaron el CA. Se votan 2 de 3 integrantes. Los 2 más votados son titulares. El 3ro lo designa COREAP.",riesgo:"⚠️ Participación obligatoria. Quien no vota queda inhabilitado para el concurso."},
+    {num:5,title:"Examen en Escuela de Maestros",plazo:"Según cronograma",badge:"badge-ok",actors:["Docente","Jurado","Escuela de Maestros","Analista Concursos"],norma:"Art. 28 E.D. 2024",detalle:"Veedores en Escuela de Maestros. Recepción de notas y convocatoria a aprobados para el concurso.",riesgo:null},
+    {num:6,title:"Desarrollo del concurso",plazo:"Según cronograma",badge:"badge-ok",actors:["Docente","Jurado","Juntas de Clasificación","Analista Concursos"],norma:"Art. 28 E.D. 2024",detalle:"Jurado evalúa y entrega resultados a Juntas. Organización del orden de mérito final.",riesgo:null},
+    {num:7,title:"Designación e impacto en Sistemas 1",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Juntas de Clasificación","Analista Concursos","DGPDYND"],norma:"Flujo interno COREAP",detalle:"Elección de cargos. Generación de expedientes, informes gráficos, notas y CCO de designaciones. Carga en Sistemas 1.",riesgo:null},
+    {num:8,title:"Reclamos, impugnaciones y rectificaciones",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Concursos","RRHH / Admin","DGPDYND"],norma:"Arts. 50–58 E.D. 2024",detalle:"Análisis de reclamos. Rectificaciones por SADE. Flujo con DGPDYND para resoluciones.",riesgo:"⚠️ Impugnaciones pueden reabrir procesos ya considerados cerrados."},
+  ],
+  rrhh: [
+    {num:1,title:"Ingreso de expedientes vía SADE",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","Otras coordinaciones"],norma:"Arts. 50–58 E.D. 2024",detalle:"Ingresan reconsideraciones/recursos jerárquicos, impugnaciones de concursos y reclamos por acto público.",riesgo:null},
+    {num:2,title:"Clasificación y revisión del expediente",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","Otras coordinaciones"],norma:"Art. 50 E.D. 2024 (ex Art. 51)",detalle:"Clasificación por tipo. Revisión cruzada con otras coordinaciones. Generación de dos informes: respuesta al reclamo y datos del docente.",riesgo:null},
+    {num:3,title:"Resolución y envío a DGCLEI",plazo:"10 días hábiles",badge:"badge-warn",actors:["RRHH / Admin","DGCLEI"],norma:"Art. 50 E.D. 2024 (ex Art. 51)",detalle:"Se envía a la Dirección General de Coordinación Legal e Institucional. Ratificación o rectificación de puntaje.",riesgo:null},
+    {num:4,title:"Altas, bajas y modificaciones de agentes",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","DGCDO","Liquidación","MEDGC","DGPDYND"],norma:"Flujo interno GCBA",detalle:"Vocales → EX → IF gráfico → Liquidación. Contratos HC/PT → IF → MEDGC. LOYS → SASUM → EX vinculación → DGPDYND → facturación.",riesgo:null},
+    {num:5,title:"Proyecto de resolución de listados",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","DGCDO","DG","COREAP"],norma:"Flujo interno GCBA",detalle:"Mail con PDF → IF + Proyecto de Resolución en GEDO + EX → DGCDO firma → DG firma → COREAP guarda temporal.",riesgo:null},
+    {num:6,title:"Reclamos de licencias y salario familiar",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin","Docente","DGPDYND","DGDHL"],norma:"Estatuto Docente · Licencias",detalle:"Licencias → EX vía SADE → IF vinculado → Docente: 014 / No docente: 03. Salario familiar → G-FAMA (docentes) / DGDHL (no docentes).",riesgo:null},
+    {num:7,title:"Control de presentismo y gestión SIAL/SADE",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["RRHH / Admin"],norma:"Art. 6f E.D. · Reglamentación GCBA",detalle:"Análisis de asistencias, fichadas, comisiones. Tickets MIA. GEDO, CCOO, alta de contratos y vocalías Art. 10.",riesgo:null},
+  ],
+  cad: [
+    {num:1,title:"Ingreso de consulta (ZOOM o mail)",plazo:"Lunes 10–20hs · Mar–Vie 10–16hs",badge:"badge-warn",actors:["Docente","Asesor CAD"],norma:"Instructivo CAD",detalle:"ZOOM: administrador deriva al operador. Mail: operador accede a la ticketera. Registro en formulario.",riesgo:null},
+    {num:2,title:"Diagnóstico de la consulta",plazo:"Tiempo real",badge:"badge-danger",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"¿Se puede resolver? Sí: se informa y comparte pantalla si hace falta. No: se deriva internamente.",riesgo:"⚠️ Alta presión operativa: el asesor debe diagnosticar al instante con el docente conectado."},
+    {num:3,title:"Derivación interna (si aplica)",plazo:"Respuesta inmediata",badge:"badge-danger",actors:["Asesor CAD","Coordinador"],norma:"Instructivo CAD",detalle:"Se deriva internamente. El coordinador responde de inmediato o se responde por mail. Registro de la derivación.",riesgo:"⚠️ Requiere disponibilidad inmediata de coordinadores. Si no están disponibles, el docente queda sin respuesta en el momento."},
+    {num:4,title:"Registro y cierre de la consulta",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"Registro completo en formulario. Se informa la resolución al docente. Permite trazabilidad de casos.",riesgo:null},
+    {num:5,title:"Gestión de reclamos particulares",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Asesor CAD","Coordinador"],norma:"Instructivo CAD",detalle:"Reclamos que requieren gestión particular más allá de la consulta inmediata. Análisis y resolución coordinada.",riesgo:null},
+    {num:6,title:"Actualización de materiales y capacitaciones",plazo:"Continuo",badge:"badge-ok",actors:["Asesor CAD"],norma:"Instructivo CAD",detalle:"Actualización normativa constante. Charlas orientativas presenciales y virtuales. Producción de videos tutoriales para RRSS.",riesgo:null},
+  ],
+};
+
+const autoData = {
+  listados: [
+    {icon:"📧",name:"Acuse de recibo automático al docente",trigger:"Trigger: mail entrante en validacion.scd@bue.edu.ar",impact:"alto",desc:"Cuando llega un mail con documentación, automatización responde automáticamente confirmando la recepción, indicando qué documentos se recibieron y cuál es el próximo paso. Elimina la tarea manual de respuesta inicial.",nodes:["Email Trigger","Gmail node","Template node"]},
+    {icon:"🗂️",name:"Registro automático de reclamos en Airtable",trigger:"Trigger: mail con asunto que incluye 'reclamo' o 'reconsideración'",impact:"alto",desc:"automatización detecta mails de reclamos, extrae datos clave (nombre, DNI, tipo de reclamo) con Claude AI y los registra automáticamente en Airtable para seguimiento del equipo.",nodes:["Email Trigger","Claude AI node","Airtable node","Gmail node"]},
+    {icon:"⏰",name:"Alertas de plazo de reconsideración",trigger:"Trigger: scheduler diario durante período de exhibición",impact:"alto",desc:"Durante los 5 días de exhibición, automatización calcula automáticamente cuándo comienzan los 3 días hábiles de reconsideración y envía alertas al equipo 24hs antes del vencimiento.",nodes:["Schedule Trigger","Date & Time node","Gmail/Slack node"]},
+    {icon:"📊",name:"Dashboard de seguimiento de expedientes",trigger:"Trigger: actualización en planilla de seguimiento",impact:"medio",desc:"Cuando el equipo actualiza el estado de un expediente, automatización sincroniza automáticamente con Airtable y puede generar reportes semanales de estado para la coordinación.",nodes:["Google Sheets Trigger","Airtable node","Gmail node"]},
+    {icon:"🔔",name:"Notificación de inicio de nueva etapa",trigger:"Trigger: cambio de estado en planilla de proceso",impact:"medio",desc:"Cuando el listado pasa de 'provisorio' a 'en exhibición' o de 'reconsiderado' a 'definitivo', automatización notifica automáticamente a todos los actores involucrados de la siguiente etapa.",nodes:["Google Sheets Trigger","Gmail node","Template node"]},
+  ],
+  apel: [
+    {icon:"📬",name:"Flujo de solicitud de cuenta @BUE",trigger:"Trigger: formulario de solicitud de cuenta enviado",impact:"alto",desc:"Cuando un docente completa el formulario de creación de cuenta @BUE, automatización registra la solicitud en Airtable, envía confirmación al docente y asigna la tarea al analista disponible con todos los datos adjuntos.",nodes:["Webhook/Form Trigger","Airtable node","Gmail node","Slack node"]},
+    {icon:"⚡",name:"Alerta de remanentes a punto de vencer",trigger:"Trigger: scheduler post-cierre de acto público",impact:"alto",desc:"Al cierre del acto público, automatización dispara una alerta automática al equipo indicando que hay 24hs para gestionar remanentes, con el listado de cargos no cubiertos.",nodes:["Schedule Trigger","Gmail/Slack node","Template node"]},
+    {icon:"📤",name:"Envío automático de designaciones a Concursos",trigger:"Trigger: cierre del acto público",impact:"medio",desc:"Cuando el acto público cierra, automatización puede estructurar y enviar el archivo de designaciones al equipo de Concursos automáticamente, reemplazando el envío manual por Excel.",nodes:["Schedule Trigger","Google Drive node","Gmail node"]},
+    {icon:"📣",name:"Comunicados APEL automatizados por área",trigger:"Trigger: nuevo acto público creado en APEL",impact:"medio",desc:"Cuando se configura un nuevo acto público, automatización puede generar y enviar los comunicados a las áreas correspondientes con los datos del acto usando plantillas predefinidas.",nodes:["Webhook Trigger","Template node","Gmail node"]},
+  ],
+  concursos: [
+    {icon:"📅",name:"Monitor de cronograma concursal",trigger:"Trigger: scheduler diario",impact:"alto",desc:"automatización revisa diariamente el cronograma del concurso y envía alertas proactivas al equipo cuando se acercan fechas clave (apertura de postulaciones, vencimiento de elección de jurados, entrega de notas).",nodes:["Schedule Trigger","Google Sheets node","Gmail node","Slack node"]},
+    {icon:"🏫",name:"Coordinación automática con Escuela de Maestros",trigger:"Trigger: 5 días antes del examen",impact:"medio",desc:"automatización envía automáticamente los recordatorios de coordinación a la Escuela de Maestros (veedores, notas, listados) y hace seguimiento de confirmaciones.",nodes:["Schedule Trigger","Gmail node","Airtable node"]},
+    {icon:"📋",name:"Registro centralizado de ingresantes al CA",trigger:"Trigger: actualización de listado de ingresantes",impact:"medio",desc:"Cuando se actualiza el listado de ingresantes al Curso de Ascenso, automatización lo registra en Airtable, notifica a DGPDYND y genera un resumen estructurado para el envío formal.",nodes:["Google Sheets Trigger","Airtable node","Gmail node"]},
+  ],
+  rrhh: [
+    {icon:"📱",name:"Captación de reclamos WhatsApp/mail de la DG",trigger:"Trigger: mail entrante de dirección de la DG",impact:"alto",desc:"Los pedidos informales de la DG por mail son detectados, registrados automáticamente en Airtable con prioridad alta, y se asigna un responsable con notificación inmediata. Convierte lo informal en trazable.",nodes:["Email Trigger","Airtable node","Slack node","Claude AI node"]},
+    {icon:"📊",name:"Reporte semanal de expedientes por estado",trigger:"Trigger: scheduler semanal (viernes 17hs)",impact:"medio",desc:"automatización genera automáticamente un resumen semanal del estado de todos los expedientes activos (SADE) y lo envía a la coordinación con métricas de tiempo de resolución y alertas de vencimiento.",nodes:["Schedule Trigger","Airtable node","Gmail node","Template node"]},
+    {icon:"🔗",name:"Notificación de EX enviado a otras áreas",trigger:"Trigger: cambio de estado en tabla de expedientes",impact:"medio",desc:"Cuando RRHH/Admin envía un expediente a otra área (DGCLEI, Concursos, Listados), automatización notifica automáticamente al área destinataria con los datos del expediente y el plazo esperado de respuesta.",nodes:["Airtable Trigger","Gmail node","Slack node"]},
+  ],
+  cad: [
+    {icon:"🤖",name:"Bot de pre-atención para consultas FAQ",trigger:"Trigger: mail entrante a cadentuescuela@bue.edu.ar",impact:"alto",desc:"Claude AI analiza el mail del docente y si es una consulta FAQ conocida (puntaje, @BUE, inscripciones, acto público), responde automáticamente con la información correcta. Solo deriva al asesor si la consulta es compleja o el docente sigue sin respuesta.",nodes:["Email Trigger","Claude AI node","Gmail node","Airtable node"]},
+    {icon:"📈",name:"Dashboard de consultas frecuentes",trigger:"Trigger: nuevo registro en formulario de consultas",impact:"medio",desc:"Cada vez que el equipo registra una consulta, automatización la clasifica automáticamente por tipo y actualiza un dashboard en tiempo real con las preguntas más frecuentes. Útil para detectar qué contenido producir en videos.",nodes:["Form Trigger","Claude AI node","Airtable node","Google Sheets node"]},
+  ],
+};
+
+const badgeColors = {'badge-danger':'#e06060','badge-warn':'#d4943a','badge-info':'#5a9fd4','badge-ok':'#5aaa7a','badge-neutral':'#7a7870'};
+
+function buildEtapas(key) {
+  const c = document.getElementById('etapas-'+key);
+  if(!c||c.children.length>0) return;
+  etapasData[key].forEach(e=>{
+    const col=badgeColors[e.badge]||'#7a7870';
+    const d=document.createElement('div');
+    d.className='etapa';
+    d.innerHTML=`<div class="etapa-header" onclick="toggleEtapa(this)"><div class="etapa-num" style="background:${col}22;color:${col}">${e.num}</div><div class="etapa-title">${e.title}</div><div class="plazo-badge ${e.badge}">${e.plazo}</div><div class="chevron">▾</div></div><div class="etapa-body"><div class="etapa-meta"><div class="meta-block"><div class="meta-lbl">Norma legal</div><div class="meta-val">${e.norma}</div></div><div class="meta-block"><div class="meta-lbl">Actores</div><div class="actors">${e.actors.map(a=>`<span class="actor">${a}</span>`).join('')}</div></div></div><div class="etapa-desc">${e.detalle}</div>${e.riesgo?`<div class="risk-block">${e.riesgo}</div>`:''}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function buildAuto(key) {
+  const c=document.getElementById('auto-'+key);
+  if(!c||c.children.length>0) return;
+  autoData[key].forEach(a=>{
+    const d=document.createElement('div');
+    d.className='auto-card';
+    d.innerHTML=`<div class="auto-card-top"><div class="auto-icon" style="background:var(--purple-bg)">${a.icon}</div><div class="auto-card-info"><div class="auto-card-name">${a.name}</div><div class="auto-card-trigger">${a.trigger}</div></div><span class="impact-badge impact-${a.impact}">Impacto ${a.impact}</span></div><div class="auto-card-desc">${a.desc}</div><div class="auto-nodes">${a.nodes.map(n=>`<span class="auto-node">${n}</span>`).join('')}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function toggleEtapa(h){h.parentElement.classList.toggle('open');}
+
+function showInner(sec,panel,tabEl){
+  document.querySelectorAll(`#sec-${sec} .inner-panel`).forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll(`#sec-${sec} .inner-tab`).forEach(t=>t.classList.remove('active'));
+  document.getElementById(`${sec}-${panel}`).classList.add('active');
+  tabEl.classList.add('active');
+  if(panel==='etapas') buildEtapas(sec);
+  if(panel==='auto') buildAuto(sec);
+}
+
+function showSection(key,navEl){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('sec-'+key).classList.add('active');
+  const nav=navEl||document.querySelector(`.nav-item[data-sec="${key}"]`);
+  if(nav) nav.classList.add('active');
+  if(key!=='overview') buildEtapas(key);
+}
+
+// Wire up nav items via data attributes instead of inline onclick
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-item[data-sec]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showSection(el.dataset.sec, el);
+    });
+  });
+  document.querySelectorAll('.back-btn[data-sec]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showSection(el.dataset.sec);
+    });
+  });
+  document.querySelectorAll('.overview-card[data-sec]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showSection(el.dataset.sec);
+    });
+  });
+  document.querySelectorAll('.inner-tab[data-inner]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showInner(el.dataset.sec, el.dataset.inner, el);
+    });
+  });
+  buildEtapas('listados');
+});
+</script>
+</body>
+</html>
