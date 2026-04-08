@@ -710,7 +710,7 @@
   </main>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const etapasData = {
   listados: [
     {num:1,title:"Recepción y validación de documentación",plazo:"Sin plazo fijo",badge:"badge-ok",actors:["Analista Listados","Docente"],norma:"Art. 13 E.D. + SCD",detalle:"El docente envía documentación a validacion.scd@bue.edu.ar. El equipo analiza y aprueba o rechaza. Si falta algo, queda pendiente para carga posterior.",riesgo:null},
@@ -859,4 +859,18 @@ document.addEventListener('DOMContentLoaded', function() {
       showSection(el.dataset.sec);
     });
   });
-  document.querySelectorAll('.overview-card[data-sec]').fo
+  document.querySelectorAll('.overview-card[data-sec]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showSection(el.dataset.sec);
+    });
+  });
+  document.querySelectorAll('.inner-tab[data-inner]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showInner(el.dataset.sec, el.dataset.inner, el);
+    });
+  });
+  buildEtapas('listados');
+});
+</script>
+</body>
+</html>
