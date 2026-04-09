@@ -262,7 +262,7 @@
       <div class="stats-row">
         <div class="stat-card"><div class="stat-card-label">Total etapas</div><div class="stat-card-val">40</div></div>
         <div class="stat-card"><div class="stat-card-label">Plazos críticos</div><div class="stat-card-val danger">4</div></div>
-        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">21</div></div>
+        <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">22</div></div>
         <div class="stat-card"><div class="stat-card-label">Sistemas en uso</div><div class="stat-card-val ok">11</div></div>
       </div>
       <div class="overview-grid">
@@ -292,8 +292,8 @@
         </div>
         <div class="overview-card" data-sec="cad">
           <div class="overview-card-top"><div class="overview-card-name">🎓 CAD en tu Escuela</div><div class="overview-card-count">12 personas · 7 etapas · 6 auto</div></div>
-          <div class="overview-card-desc">Atención de consultas docentes por ZOOM y mail. Derivación y resolución en tiempo real.</div>
-          <div class="overview-risks"><span class="risk-tag badge-danger">Resolución en tiempo real</span><span class="risk-tag badge-danger">Derivación inmediata</span></div>
+          <div class="overview-card-desc">osTicket: 4.591 tickets último mes · 65% vencidos · 130 min respuesta. 41.622 consultas registradas (feb 2025–abr 2026). API nativa disponible.</div>
+          <div class="overview-risks"><span class="risk-tag badge-danger">65% tickets vencidos</span><span class="risk-tag badge-danger">Casos Unidad de Ministro sin registro</span></div>
           <div class="overview-arrow">Ver coordinación →</div>
         </div>
       </div>
@@ -304,7 +304,7 @@
           <tbody>
             <tr><td class="td-coord">Listados</td><td class="td-etapa">Exhibición y reconsideración del listado provisorio</td><td><span class="plazo-badge badge-danger">5 días hábiles combinados</span></td><td class="td-coord">Art. 49 E.D. 2024</td></tr>
             <tr><td class="td-coord">APEL</td><td class="td-etapa">Remanentes post-acto público</td><td><span class="plazo-badge badge-danger">24 horas</span></td><td class="td-coord">Instructivo APEL</td></tr>
-            <tr><td class="td-coord">CAD</td><td class="td-etapa">Diagnóstico de consulta en vivo</td><td><span class="plazo-badge badge-danger">Tiempo real</span></td><td class="td-coord">Instructivo CAD</td></tr>
+            <tr><td class="td-coord">CAD</td><td class="td-etapa">65% de tickets vencen sin respuesta (osTicket · últ. mes)</td><td><span class="plazo-badge badge-danger">130 min promedio</span></td><td class="td-coord">Dashboard osTicket</td></tr>
             <tr><td class="td-coord">CAD</td><td class="td-etapa">Derivación interna a coordinadores</td><td><span class="plazo-badge badge-danger">Inmediata</span></td><td class="td-coord">Instructivo CAD</td></tr>
           </tbody>
         </table>
@@ -592,7 +592,7 @@
       <div class="section-header">
         <div class="section-eyebrow">Coordinación 05</div>
         <div class="section-title">CAD en tu Escuela</div>
-        <div class="section-desc">32.453 consultas en 2025 · 18.100 docentes alcanzados · 12 asesores · atención por Zoom, mail y presencial.</div>
+        <div class="section-desc">32.453 consultas en 2025 · 18.100 docentes · Ticketera: osTicket (ticket.joselh.com) · Último mes: 4.591 tickets, 65% vencidos, 130 min de respuesta promedio.</div>
       </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="cad" data-inner="etapas">ETAPAS Y PLAZOS</div>
@@ -604,12 +604,12 @@
       <div id="cad-sistemas" class="inner-panel">
         <div class="sistemas-grid">
           <div class="sistema-card">
-            <div class="sistema-name">Ticketera (app interna)</div>
-            <div class="sistema-type">Gestión de consultas por mail · Desarrollo propio del equipo de Sistemas</div>
-            <div class="sistema-desc">App web desarrollada internamente. Recibe los mails de <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af9fbfefff4eeefffe9f9effff6fbdaf8efffb4fffeefb4fbe8">[email&#160;protected]</a> y permite al coordinador asignar casos a agentes. La asignación masiva se evita porque entre los mails puede haber casos especiales de la Unidad de Ministro.</div>
-            <div class="sistema-meta"><span class="sistema-acceso">🔧 Integración posible</span></div>
-            <div class="sistema-problema">⚠️ La revisión manual de cada mail antes de asignar genera un cuello de botella en el coordinador. Sin clasificación automática, el coordinador dedica tiempo a lectura en lugar de gestión.</div>
-            <span class="sistema-badge sb-api">App interna · API negociable</span>
+            <div class="sistema-name">Ticketera — osTicket</div>
+            <div class="sistema-type">Sistema de tickets · Open source · ticket.joselh.com</div>
+            <div class="sistema-desc">La ticketera es osTicket, el sistema open source de helpdesk más usado del mundo. Recibe los mails de cadentuescuela@bue.edu.ar como tickets. El coordinador los asigna manualmente a los agentes. Actualmente hay 1.038+ tickets abiertos. Último mes: 4.591 abiertos, 2.985 vencidos (65%), 1.457 reabiertos (32%). Tiempo de respuesta promedio: 130 minutos.</div>
+            <div class="sistema-meta"><span class="sistema-acceso">🔑 API nativa disponible · requiere API key del admin</span></div>
+            <div class="sistema-problema">⚠️ La API nativa de osTicket solo permite crear tickets, no modificar existentes. Para asignar agentes o actualizar campos en tickets existentes se necesita instalar un plugin open source de endpoints extendidos (operación de 10 minutos para el admin). El 65% de tickets vencen sin respuesta — la clasificación automática es la intervención de mayor impacto inmediato.</div>
+            <span class="sistema-badge sb-api">osTicket · API REST nativa</span>
           </div>
           <div class="sistema-card">
             <div class="sistema-name">Google Forms + Google Sheets</div>
@@ -654,9 +654,19 @@
         </div>
       </div>
       <div id="cad-carga" class="inner-panel">
-        <div class="carga-intro">Datos extraídos del registro real de consultas (Google Sheets). 41.622 registros totales desde febrero 2025 hasta hoy. 17.633 docentes únicos atendidos. El 75% llega por correo electrónico. El área Media representa el 45% del volumen total.</div>
+        <div class="carga-intro">Datos de dos fuentes reales: osTicket (dashboard) y Google Sheets (formulario de registro). Último mes en osTicket: 4.591 tickets, 65% vencidos, 32% reabiertos, 130 min de respuesta promedio. Formulario: 41.622 registros desde febrero 2025, 17.633 docentes únicos.</div>
+
+        <div class="critical-title" style="margin-bottom:8px">Métricas osTicket — último mes (mar–abr 2026)</div>
+        <div class="carga-grid" style="margin-bottom:1.5rem">
+          <div class="carga-card"><div class="carga-label">Tickets abiertos</div><div class="carga-val" style="color:var(--danger)">4.591</div><div class="carga-sub">~153 por día hábil · 1.038 activos ahora</div></div>
+          <div class="carga-card"><div class="carga-label">Tickets vencidos</div><div class="carga-val" style="color:var(--danger)">65%</div><div class="carga-sub">2.985 superan el tiempo acordado</div></div>
+          <div class="carga-card"><div class="carga-label">Tickets reabiertos</div><div class="carga-val" style="color:var(--warn)">32%</div><div class="carga-sub">1.457 casos que vuelven a abrirse</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:32%;background:var(--warn)"></div></div></div>
+          <div class="carga-card"><div class="carga-label">Tiempo de respuesta</div><div class="carga-val" style="font-size:14px">130 min</div><div class="carga-sub">Service time total: 399 min (~6,6 hs)</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:55%;background:var(--accent)"></div></div></div>
+        </div>
+
+        <div class="critical-title" style="margin-bottom:8px">Métricas formulario Google Sheets (feb 2025 – abr 2026)</div>
         <div class="carga-grid">
-          <div class="carga-card"><div class="carga-label">Total registros (feb 2025 – abr 2026)</div><div class="carga-val" style="color:var(--accent)">41.622</div><div class="carga-sub">17.633 docentes únicos</div></div>
+          <div class="carga-card"><div class="carga-label">Total registros</div><div class="carga-val" style="color:var(--accent)">41.622</div><div class="carga-sub">17.633 docentes únicos</div></div>
           <div class="carga-card"><div class="carga-label">2025 completo</div><div class="carga-val">32.453</div><div class="carga-sub">2026 va 9.169 en los primeros 4 meses</div></div>
           <div class="carga-card"><div class="carga-label">Canal mail</div><div class="carga-val">31.378</div><div class="carga-sub">75,4% del volumen total</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:75%;background:var(--accent)"></div></div></div>
           <div class="carga-card"><div class="carga-label">Canal Zoom</div><div class="carga-val">10.120</div><div class="carga-sub">24,3% · sin métricas de espera</div><div class="carga-bar-wrap"><div class="carga-bar" style="width:24%;background:var(--info)"></div></div></div>
@@ -790,12 +800,12 @@ const autoData = {
     {icon:"📊",name:"Reporte mensual automático de expedientes",trigger:"Trigger: scheduler mensual · primer día hábil de cada mes",impact:"medio",desc:"El primer día de cada mes, se genera automáticamente un resumen del mes anterior: total de expedientes por tipo, tiempo promedio de resolución, expedientes que superaron los 30 días, distribución por analista. Reemplaza el armado manual de reportes y da visibilidad a la Dirección sin trabajo extra del equipo.",cond:"Condición: que los dropdowns forzados y la columna de tiempo de resolución estén implementados primero. El Google Sheets ya tiene todo lo necesario."},
   ],
   cad: [
-    {icon:"🔧",name:"Clasificación automática de mails en la ticketera",trigger:"Condición: acceso a la API o base de datos de la ticketera (app interna de Sistemas)",impact:"alto",desc:"Al ingresar un mail a la ticketera, se analiza el asunto y cuerpo para clasificarlo automáticamente por motivo (Documentación, Acto público, @BUE, etc.) y área del docente. El coordinador ve el mail ya etiquetado y puede asignar con confianza — incluso en modo masivo, porque los casos especiales quedan marcados con una etiqueta diferente.",cond:"Condición: coordinar con el equipo de Sistemas para agregar un campo 'clasificación' a la ticketera y exponer un endpoint o webhook de entrada de mails. Es la integración más estratégica del proyecto."},
-    {icon:"🚨",name:"Detección automática de casos Unidad de Ministro",trigger:"Condición: acceso al mail de entrada o a la ticketera",impact:"alto",desc:"Antes de asignar, se analiza si el mail proviene de un dominio ministerial, menciona a la Ministra, a Rocío, o viene de un hilo de Instagram. Si coincide, se marca automáticamente como 'caso especial' y se excluye de la asignación masiva. El coordinador solo ve los casos especiales separados del flujo general.",cond:"Condición: lista de palabras clave y remitentes a monitorear. Puede implementarse en la ticketera o como paso previo en el flujo de entrada de mails."},
-    {icon:"📬",name:"Acuse de recibo automático al docente",trigger:"Trigger: mail entrante a cadentuescuela@bue.edu.ar",impact:"alto",desc:"Al recibir un mail, el sistema responde automáticamente al docente confirmando que su consulta fue recibida, indicando el número de ticket asignado y el tiempo estimado de respuesta según el volumen actual. Reduce la ansiedad del docente y los mails de seguimiento duplicados.",cond:"Condición: acceso al mail de entrada o a la ticketera. El número de ticket ya existe — solo falta disparar el mail de confirmación."},
-    {icon:"📊",name:"Dashboard de tiempo de espera en Zoom",trigger:"Trigger: API de Zoom + datos del formulario de registro",impact:"alto",desc:"Combinar la API de Zoom (que registra entrada y salida de participantes) con el formulario de registro (que tiene la hora de resolución) para calcular el tiempo promedio de espera en sala. Esto permite al coordinador demostrar con datos cuánto espera la gente y fundamentar la decisión sobre Calendly u otro sistema de turnos.",cond:"Condición: habilitar la API de Zoom con permisos de lectura de participantes. No requiere cambios en el flujo de atención actual."},
-    {icon:"📅",name:"Sistema de turnos para Zoom (evaluación Calendly)",trigger:"Condición: decisión del coordinador de adoptar turnos",impact:"medio",desc:"Calendly permite que el docente reserve un turno en la sala de Zoom sin necesidad de esperar. El asesor asignado recibe el turno en su calendario y el docente recibe una confirmación con el link. Elimina la queja de 'nadie me responde' y genera automáticamente un registro de cada atención.",cond:"Condición: el coordinador debe definir si los turnos son por asesor o por franja horaria del equipo. Calendly tiene integración nativa con Google Calendar (ya en uso en el GCBA)."},
-    {icon:"📈",name:"Reporte semanal automático de consultas por motivo",trigger:"Trigger: Google Sheets (formulario de registro) · cada lunes 9hs",impact:"medio",desc:"Cada lunes, se genera automáticamente un resumen de las consultas de la semana anterior: top motivos, top áreas, volumen por canal y por asesor. Se envía al coordinador y a la Dirección. Reemplaza el armado manual del reporte y permite detectar tendencias (ej: aumento de fallas de SCD para títulos) antes de que exploten.",cond:"Condición: el formulario de Google Sheets ya tiene todos los campos necesarios. No requiere cambios en el sistema de registro."},
+    {icon:"🏷️",name:"Clasificación automática de tickets en osTicket",trigger:"Trigger: polling a osTicket API cada 2 minutos · tickets sin clasificar",impact:"alto",desc:"n8n consulta la API de osTicket, lee los tickets nuevos sin asignar, los clasifica con IA por motivo (13 categorías del formulario) y área docente, y agrega una nota interna visible solo para el staff con la clasificación y el agente sugerido. El coordinador ve cada ticket ya etiquetado y decide la asignación con un clic en lugar de leer cada mail desde cero.",cond:"Condición: API key de osTicket generada por el admin (Manage → API Keys, 2 minutos). Para actualizar campos del ticket (no solo agregar nota): instalar plugin open source 'osticket-api-endpoints' en el servidor. Sin el plugin, la nota interna ya resuelve el 80% del problema."},
+    {icon:"🚨",name:"Detección y separación de casos Unidad de Ministro",trigger:"Trigger: análisis de remitente y contenido en cada ticket nuevo",impact:"alto",desc:"Antes de clasificar, n8n analiza si el ticket menciona a la Ministra, a Rocío (Directora de Área), proviene de un dominio de alto rango, o contiene palabras clave de urgencia institucional. Si coincide, agrega etiqueta '⭐ CASO ESPECIAL' y lo excluye del flujo de asignación automática. El coordinador ve estos casos separados del resto.",cond:"Condición: lista de palabras clave y remitentes a monitorear. Se configura una sola vez en n8n. No requiere tocar osTicket."},
+    {icon:"📨",name:"Respuesta automática a consultas FAQ (mayor impacto)",trigger:"Trigger: ticket nuevo clasificado como motivo de alto volumen",impact:"alto",desc:"Para los 5 motivos que concentran el 88% del volumen (Documentación 26%, Acto público 19%, Listados/Puntaje 16%, Inscripción 16%, Cuenta @BUE 11%), n8n envía una respuesta automática al docente con los pasos para resolver su consulta, links a instructivos y videos tutoriales del CAD. El ticket queda abierto — si el docente no responde en 48hs, un asesor lo revisa. Si el 30% de estos casos se resuelven solos, son ~1.200 tickets menos por mes que llegan a un asesor.",cond:"Condición: que el equipo CAD redacte una respuesta tipo por cada motivo (con links a instructivos y videos). Sin ese contenido no hay nada que automatizar. Es el paso previo más importante de todo el proyecto."},
+    {icon:"🤖",name:"Asignación automática por motivo y carga",trigger:"Trigger: ticket clasificado · verificación de carga por agente",impact:"alto",desc:"Fase 2 (después de tener datos de clasificación). n8n asigna el ticket al agente con menor carga activa según el motivo: si es Documentación → Marina o Gimena (top agentes 2025 para ese motivo), si es Concursos → escala al Coordinador (34 de 77 casos de Coordinación fueron Concursos). La asignación requiere el plugin de endpoints extendidos de osTicket para actualizar el campo staff via API.",cond:"Condición: (1) Plugin osticket-api-endpoints instalado en el servidor. (2) Al menos 2 semanas de datos de clasificación automática para validar las reglas. (3) Aprobación del coordinador — la asignación automática es una decisión de gestión, no solo técnica."},
+    {icon:"📊",name:"Dashboard semanal de osTicket — métricas reales",trigger:"Trigger: scheduler · lunes 8hs",impact:"medio",desc:"Cada lunes n8n consulta la API de osTicket y genera un reporte con: tickets abiertos vs cerrados, tiempo promedio de respuesta, tickets vencidos por agente, y top motivos de la semana. El dashboard actual del coordinador muestra que el 65% de tickets vencen — este reporte permite actuar antes de que eso ocurra.",cond:"Condición: API key de osTicket. El reporte se envía por mail al coordinador y se registra en Google Sheets para histórico."},
+    {icon:"📈",name:"Reporte semanal del formulario de registro (Zoom + mail)",trigger:"Trigger: Google Sheets · cada lunes 9hs",impact:"medio",desc:"Paralelo al dashboard de osTicket: reporte de las consultas atendidas por Zoom y mail registradas en el formulario Google Forms. Top motivos, top áreas, distribución por agente y canal. Permite cruzar con osTicket para ver qué porcentaje de consultas Zoom se convirtieron en tickets.",cond:"Condición: el formulario de Google Sheets ya tiene todos los campos necesarios. Costo cero — dentro de Google Workspace."},
   ],
 };
 
