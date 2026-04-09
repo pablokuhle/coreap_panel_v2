@@ -205,6 +205,51 @@
   .td-coord { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
   .td-etapa { color: var(--text); font-weight: 500; }
 
+
+  /* FLOW MAP */
+  .flowmap { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding: 1rem 0 1.5rem; margin-bottom: 1.5rem; }
+  .flowmap-step { display: flex; flex-direction: column; align-items: center; min-width: 110px; }
+  .flowmap-node { background: var(--bg); border: 1.5px solid var(--border2); border-radius: 10px; padding: 10px 10px; text-align: center; cursor: pointer; transition: all 0.15s; width: 100px; }
+  .flowmap-node:hover { border-color: var(--accent); background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,113,227,0.1); }
+  .flowmap-node.critical { border-color: var(--danger); background: var(--danger-bg); }
+  .flowmap-node.critical:hover { background: rgba(255,59,48,0.15); }
+  .flowmap-node-num { font-family: var(--font-mono); font-size: 9px; color: var(--muted); margin-bottom: 4px; font-weight: 600; letter-spacing: 0.05em; }
+  .flowmap-node-title { font-size: 11px; font-weight: 500; color: var(--text); line-height: 1.35; }
+  .flowmap-node-badge { font-family: var(--font-mono); font-size: 9px; margin-top: 5px; padding: 2px 5px; border-radius: 999px; }
+  .flowmap-arrow { display: flex; align-items: center; padding: 0 2px; padding-top: 20px; color: var(--muted); font-size: 14px; flex-shrink: 0; }
+  .flowmap-global { display: flex; flex-direction: column; gap: 12px; margin-bottom: 2rem; }
+  .flowmap-row { display: flex; align-items: center; gap: 0; }
+  .flowmap-coord-label { width: 90px; font-size: 11px; font-weight: 500; color: var(--muted); font-family: var(--font-mono); flex-shrink: 0; padding-right: 8px; text-align: right; }
+  .flowmap-global-node { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; text-align: center; cursor: pointer; transition: all 0.12s; min-width: 80px; font-size: 10.5px; font-weight: 500; color: var(--text); line-height: 1.3; white-space: nowrap; }
+  .flowmap-global-node:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .flowmap-global-node.crit { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); }
+  .flowmap-global-arrow { color: var(--muted); font-size: 12px; padding: 0 3px; flex-shrink: 0; }
+
+  /* SADE COLUMNS TABLE */
+  .sade-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 1.5rem; }
+  .sade-table th { background: var(--surface); font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 10px; border: 1px solid var(--border); text-align: left; }
+  .sade-table td { padding: 8px 10px; border: 1px solid var(--border); color: #515154; vertical-align: top; line-height: 1.45; }
+  .sade-table tr:hover td { background: var(--surface); }
+  .sade-col-name { color: var(--text); font-weight: 500; font-size: 12px; }
+  .sade-col-desc { color: var(--muted); font-size: 11px; }
+  .sade-example { font-family: var(--font-mono); font-size: 10px; color: var(--accent); background: var(--accent-light); padding: 1px 5px; border-radius: 4px; }
+
+  /* INFO BLOCKS */
+  .info-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 12px; }
+  .info-block-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .info-block-body { font-size: 12.5px; color: #515154; line-height: 1.6; }
+  .info-block.warn { border-left: 3px solid var(--warn); }
+  .info-block.danger { border-left: 3px solid var(--danger); }
+  .info-block.ok { border-left: 3px solid var(--ok); }
+  .info-block.info { border-left: 3px solid var(--info); }
+
+  /* GLOBAL MAP OVERVIEW */
+  .global-map-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 2rem; overflow-x: auto; }
+  .global-map-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+  .global-map-legend { display: flex; gap: 16px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .gml-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); font-family: var(--font-mono); }
+  .gml-dot { width: 8px; height: 8px; border-radius: 2px; }
+
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
@@ -265,6 +310,88 @@
         <div class="stat-card"><div class="stat-card-label">Oportunidades automatización</div><div class="stat-card-val purple">22</div></div>
         <div class="stat-card"><div class="stat-card-label">Sistemas en uso</div><div class="stat-card-val ok">11</div></div>
       </div>
+
+      <!-- MAPA GLOBAL DE PROCESOS -->
+      <div class="global-map-wrap">
+        <div class="global-map-title">Mapa de procesos — vista integral COREAP</div>
+        <div class="flowmap-global">
+
+          <div class="flowmap-row">
+            <div class="flowmap-coord-label">📋 LISTADOS</div>
+            <div class="flowmap-global-node" onclick="showSection('listados')">Recepción docs</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('listados')">Cálculo listado</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('listados')">Corrección</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node crit" onclick="showSection('listados')">Exhibición 5d</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('listados')">Listado definitivo</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('listados')">Vigencia → APEL</div>
+          </div>
+
+          <div class="flowmap-row">
+            <div class="flowmap-coord-label">⚡ APEL</div>
+            <div class="flowmap-global-node" onclick="showSection('apel')">Recepción vacantes</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('apel')">Acondicionamiento</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('apel')">Config. en APEL</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node crit" onclick="showSection('apel')">Acto público</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node crit" onclick="showSection('apel')">Remanentes 24hs</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('apel')">Designaciones → Concursos</div>
+          </div>
+
+          <div class="flowmap-row">
+            <div class="flowmap-coord-label">🏆 CONCURSOS</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Planificación</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Convocatoria</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Postulaciones</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Elección jurados</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Examen esc. maestros</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('concursos')">Designación → SADE</div>
+          </div>
+
+          <div class="flowmap-row">
+            <div class="flowmap-coord-label">📂 DESPACHO</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Mesa entrada SADE</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Buzón grupal</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Análisis + nota</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Consulta Junta</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Registro en Sheets</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('rrhh')">Resolución → guarda</div>
+          </div>
+
+          <div class="flowmap-row">
+            <div class="flowmap-coord-label">🎓 CAD</div>
+            <div class="flowmap-global-node crit" onclick="showSection('cad')">Mail / Zoom entrada</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('cad')">osTicket asigna</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('cad')">Diagnóstico asesor</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('cad')">Resolución / deriva</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('cad')">Registro formulario</div><div class="flowmap-global-arrow">→</div>
+            <div class="flowmap-global-node" onclick="showSection('cad')">Cierre ticket</div>
+          </div>
+
+        </div>
+        <div class="global-map-legend">
+          <div class="gml-item"><div class="gml-dot" style="background:var(--bg);border:1px solid var(--border2)"></div>Etapa normal</div>
+          <div class="gml-item"><div class="gml-dot" style="background:var(--danger-bg);border:1px solid var(--danger)"></div>Etapa crítica</div>
+          <div class="gml-item" style="color:var(--accent)">→ Hacer clic en cualquier etapa para ver el detalle</div>
+        </div>
+      </div>
+
+      <!-- ALERTAS Y DATOS CLAVE -->
+      <div class="info-block danger">
+        <div class="info-block-title">🔴 Situación crítica — CAD hoy</div>
+        <div class="info-block-body">De 12 asesores, solo 4 están operativos hoy. 1.038 tickets abiertos en osTicket. 65% de tickets del último mes vencieron sin respuesta. La automatización de respuestas FAQ y la pre-clasificación son la intervención más urgente del proyecto.</div>
+      </div>
+      <div class="info-block warn">
+        <div class="info-block-title">🟡 Riesgo operativo — Despacho</div>
+        <div class="info-block-body">El Google Sheets es el único registro histórico de 15.540 expedientes. Una vez que un expediente se archiva en SADE, se pierde el acceso. Si alguien borra una fila, la información es irrecuperable. Casos especiales se coordinan por WhatsApp y pasillo — sin trazabilidad formal.</div>
+      </div>
+      <div class="info-block ok">
+        <div class="info-block-title">🟢 Oportunidad inmediata — osTicket API</div>
+        <div class="info-block-body">La ticketera es osTicket con API REST nativa. El servidor corre en PHP + MySQL, VPS 4 núcleos 8GB RAM. El equipo de Sistemas puede crear APIs en Python. Pre-etiquetado de tickets aprobado en principio. Primer paso: API key en Manage → API Keys.</div>
+      </div>
+      <div class="info-block info">
+        <div class="info-block-title">🔵 Contexto técnico — Sistemas (actualizado hoy)</div>
+        <div class="info-block-body">Azure: SCD y APEL corren en Azure con consultora externa — integraciones posibles pero más complejas. osTicket: PHP + MySQL, servidor propio VPS, backup cada 2 días 100GB, tickets se cierran automáticamente cada 3 días. Sistemas puede desarrollar APIs en Python sin problema.</div>
+      </div>
+
       <div class="overview-grid">
         <div class="overview-card" data-sec="listados">
           <div class="overview-card-top"><div class="overview-card-name">📋 Listados</div><div class="overview-card-count">16 personas · 10 etapas · 5 auto</div></div>
@@ -318,6 +445,17 @@
         <div class="section-eyebrow">Coordinación 01</div>
         <div class="section-title">Listados</div>
         <div class="section-desc">Validación documental, cálculo, exhibición y gestión de listados por orden de mérito. 16 analistas.</div>
+      </div>
+      <div class="flowmap">
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[0]?.classList.toggle('open')"><div class="flowmap-node-num">01</div><div class="flowmap-node-title">Recepción y validación docs</div><span class="flowmap-node-badge badge-ok">Sin plazo</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[1]?.classList.toggle('open')"><div class="flowmap-node-num">02</div><div class="flowmap-node-title">Cálculo de listados</div><span class="flowmap-node-badge badge-ok">Sin plazo</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[2]?.classList.toggle('open')"><div class="flowmap-node-num">03</div><div class="flowmap-node-title">Corrección provisorio</div><span class="flowmap-node-badge badge-ok">Sin plazo</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical" onclick="document.querySelector('#listados-etapas .etapas').children[3]?.classList.toggle('open')"><div class="flowmap-node-num">04</div><div class="flowmap-node-title">Exhibición provisorio</div><span class="flowmap-node-badge badge-warn">5 días</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical" onclick="document.querySelector('#listados-etapas .etapas').children[4]?.classList.toggle('open')"><div class="flowmap-node-num">05</div><div class="flowmap-node-title">Reconsideraciones</div><span class="flowmap-node-badge badge-danger">5d combinado</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[5]?.classList.toggle('open')"><div class="flowmap-node-num">06</div><div class="flowmap-node-title">Listado definitivo</div><span class="flowmap-node-badge badge-ok">Sin plazo</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[6]?.classList.toggle('open')"><div class="flowmap-node-num">07</div><div class="flowmap-node-title">Exhibición definitivo</div><span class="flowmap-node-badge badge-warn">5 días</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[7]?.classList.toggle('open')"><div class="flowmap-node-num">08</div><div class="flowmap-node-title">Vigencia y memos</div><span class="flowmap-node-badge badge-ok">Sin plazo</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node" onclick="document.querySelector('#listados-etapas .etapas').children[9]?.classList.toggle('open')"><div class="flowmap-node-num">10</div><div class="flowmap-node-title">Acto público APEL</div><span class="flowmap-node-badge badge-neutral">Cronograma</span></div></div>
       </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="listados" data-inner="etapas">ETAPAS Y PLAZOS</div>
@@ -377,6 +515,15 @@
         <div class="section-title">APEL</div>
         <div class="section-desc">Sistema de actos públicos en línea. Configuración de vacantes, gestión de postulaciones y soporte técnico. 5 analistas.</div>
       </div>
+      <div class="flowmap">
+        <div class="flowmap-step"><div class="flowmap-node" onclick="showInner('apel','etapas',document.querySelector('[data-sec=apel][data-inner=etapas]'))"><div class="flowmap-node-num">01</div><div class="flowmap-node-title">Recepción vacantes DGPDYND</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">02</div><div class="flowmap-node-title">Acondicionamiento</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">03</div><div class="flowmap-node-title">Config. en APEL</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">04</div><div class="flowmap-node-title">Acto público</div><span class="flowmap-node-badge badge-warn">Cronograma</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">05</div><div class="flowmap-node-title">Remanentes</div><span class="flowmap-node-badge badge-danger">24 hs</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">06</div><div class="flowmap-node-title">Designaciones</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">07</div><div class="flowmap-node-title">Cuentas @BUE</div><span class="flowmap-node-badge badge-ok">Continuo</span></div></div>
+      </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="apel" data-inner="etapas">ETAPAS Y PLAZOS</div>
         <div class="inner-tab" data-sec="apel" data-inner="sistemas">SISTEMAS</div>
@@ -430,6 +577,16 @@
         <div class="section-title">Concursos</div>
         <div class="section-desc">Curso y concurso de ascenso, traslados y concursos de base. Coordinación con Juntas, DGPDYND y Escuela de Maestros. 2 analistas.</div>
       </div>
+      <div class="flowmap">
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">01</div><div class="flowmap-node-title">Planificación vacantes</div><span class="flowmap-node-badge badge-ok">Mensual</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">02</div><div class="flowmap-node-title">Convocatoria CA</div><span class="flowmap-node-badge badge-warn">30 días</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">03</div><div class="flowmap-node-title">Postulaciones APEL</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">04</div><div class="flowmap-node-title">Elección jurados</div><span class="flowmap-node-badge badge-warn">Obligatorio</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">05</div><div class="flowmap-node-title">Examen Esc. Maestros</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">06</div><div class="flowmap-node-title">Desarrollo concurso</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">07</div><div class="flowmap-node-title">Designación SADE</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">08</div><div class="flowmap-node-title">Reclamos / rectif.</div></div></div>
+      </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="concursos" data-inner="etapas">ETAPAS Y PLAZOS</div>
         <div class="inner-tab" data-sec="concursos" data-inner="sistemas">SISTEMAS</div>
@@ -479,13 +636,47 @@
         <div class="section-title">RRHH / Despacho</div>
         <div class="section-desc">Gestión de expedientes SADE, recursos jerárquicos, altas y bajas de agentes, licencias y proyectos de resolución. 3 asistentes administrativos.</div>
       </div>
+      <div class="flowmap">
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">01</div><div class="flowmap-node-title">Mesa entrada SADE</div><span class="flowmap-node-badge badge-ok">Diario</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">02</div><div class="flowmap-node-title">Buzón grupal → descarga</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">03</div><div class="flowmap-node-title">Análisis + nota interna</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">04</div><div class="flowmap-node-title">Consulta Junta (WA/pasillo)</div><span class="flowmap-node-badge badge-danger">Sin registro</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">05</div><div class="flowmap-node-title">Registro en Sheets</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">06</div><div class="flowmap-node-title">Generación EX/IF/CCOO</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">07</div><div class="flowmap-node-title">Resolución → guarda SADE</div><span class="flowmap-node-badge badge-warn">Pierde acceso</span></div></div>
+      </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="rrhh" data-inner="etapas">ETAPAS Y PLAZOS</div>
         <div class="inner-tab" data-sec="rrhh" data-inner="sistemas">SISTEMAS</div>
         <div class="inner-tab" data-sec="rrhh" data-inner="carga">CARGA DE TRABAJO</div>
         <div class="inner-tab" data-sec="rrhh" data-inner="auto">AUTOMATIZACIÓN</div>
       </div>
-      <div id="rrhh-etapas" class="inner-panel active"><div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-rrhh"></div></div>
+      <div id="rrhh-etapas" class="inner-panel active">
+        <div class="critical-title" style="margin-top:1.5rem;margin-bottom:10px">Columnas del buzón grupal SADE — lo que ven los analistas</div>
+        <table class="sade-table">
+          <thead><tr><th>Columna</th><th>Descripción</th><th>Ejemplo / Notas</th></tr></thead>
+          <tbody>
+            <tr><td><span class="sade-col-name">Tarea / Estado</span></td><td>Estado actual del expediente en el flujo de SADE</td><td><span class="sade-example">Tramitación</span> · El analista lo toma y pasa a trabajarlo</td></tr>
+            <tr><td><span class="sade-col-name">Fecha Últ. Modif.</span></td><td>Última vez que alguien tocó el expediente</td><td><span class="sade-example">4/9/26 15:10</span> · Permite detectar expedientes sin movimiento</td></tr>
+            <tr><td><span class="sade-col-name">Número Expediente</span></td><td>Identificador único del EX en el sistema GCBA</td><td><span class="sade-example">EX-2026-16567987-GCABA-DGCDO</span></td></tr>
+            <tr><td><span class="sade-col-name">Código Trámite</span></td><td>Tipo de trámite según clasificación de SADE</td><td><span class="sade-example">MEGC0203A</span> = Reubicación docente · <span class="sade-example">AJG00301A</span> = Presentación ciudadana</td></tr>
+            <tr><td><span class="sade-col-name">Descripción del Trámite</span></td><td>Nombre legible del tipo de expediente</td><td><span class="sade-example">REUBICACIÓN DOCENTE</span> · <span class="sade-example">DESIGNACIÓN DOCENTE TITULAR POR CONCURSO</span> · <span class="sade-example">AJG PRESENTACIONES CIUDADANAS</span></td></tr>
+            <tr><td><span class="sade-col-name">Motivo Pase</span></td><td>Por qué llegó al buzón — quién lo envió y con qué instrucción</td><td><span class="sade-example">Se elevan los presen…</span> · <span class="sade-example">Pase para su prosecu…</span> · <span class="sade-example">PASEDGCDO</span></td></tr>
+            <tr><td><span class="sade-col-name">Usuario Anterior</span></td><td>Cuenta SADE de quien envió el expediente al buzón actual</td><td><span class="sade-example">AFERRUFINOL</span> · <span class="sade-example">NOEMI.SARMIENTO</span> · <span class="sade-example">CPERALTA</span></td></tr>
+            <tr><td><span class="sade-col-name">Acciones</span></td><td>Operaciones disponibles: tomar, reenviar, archivar</td><td>Al tomarlo, el analista lo descarga, deja una nota interna y lo registra en el Sheets. Una vez archivado en SADE, se pierde el acceso.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-block warn" style="margin-top:1rem">
+          <div class="info-block-title">🟡 Casos especiales — coordinación informal (pasillo / WhatsApp)</div>
+          <div class="info-block-body">Existen expedientes que están siendo tratados activamente por la Junta pero que los analistas no deben tramitar. La comunicación de estos casos llega por WhatsApp o en persona ("pasillo"). Ejemplo real: docente que aprobó el concurso, se le asignó el cargo, pero al momento de la posesión el cargo no estaba disponible — la Junta está buscando alternativas. Sin un canal formal, si el analista de guardia no recibió el aviso, puede tramitar un expediente que no debe tocarse. <strong>Solución propuesta: crear un espacio en Google Chat (@bue.edu.ar ya disponible) para estos avisos, con registro permanente y buscable.</strong></div>
+        </div>
+
+        <div class="info-block info" style="margin-top:0.75rem">
+          <div class="info-block-title">🔵 LLM local para investigación de expedientes</div>
+          <div class="info-block-body">Los analistas investigan cada expediente cruzando información en múltiples sistemas: SCD, APEL, vacantes, concursos, listados. Propuesta viable: los analistas suben el PDF del expediente descargado de SADE a un LLM corriendo localmente en el servidor de Sistemas (Ollama + LLaMA/Mistral, 8GB RAM disponibles). El modelo ayuda a identificar el área, el tipo de caso y los antecedentes relevantes — sin que ningún dato salga del servidor. Integrable desde n8n como paso previo al registro en Sheets.</div>
+        </div>
+<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div>Moderado</div><div class="legend-item"><div class="legend-dot" style="background:var(--ok)"></div>Sin plazo fijo</div></div><div class="etapas" id="etapas-rrhh"></div></div>
       <div id="rrhh-sistemas" class="inner-panel">
         <div class="sistemas-grid">
           <div class="sistema-card">
@@ -594,6 +785,15 @@
         <div class="section-title">CAD en tu Escuela</div>
         <div class="section-desc">32.453 consultas en 2025 · 18.100 docentes · Ticketera: osTicket (ticket.joselh.com) · Último mes: 4.591 tickets, 65% vencidos, 130 min de respuesta promedio.</div>
       </div>
+      <div class="flowmap">
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">01</div><div class="flowmap-node-title">Mail llega a osTicket</div><span class="flowmap-node-badge badge-danger">1.038 abiertos</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node critical"><div class="flowmap-node-num">02</div><div class="flowmap-node-title">Casos Unidad Ministro</div><span class="flowmap-node-badge badge-danger">Sin registro</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">03</div><div class="flowmap-node-title">Diagnóstico asesor</div><span class="flowmap-node-badge badge-warn">Tiempo real</span></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">04</div><div class="flowmap-node-title">Resolución / derivación</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">05</div><div class="flowmap-node-title">Registro Google Forms</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">06</div><div class="flowmap-node-title">Derivación coordinaciones</div></div></div><div class="flowmap-arrow">→</div>
+        <div class="flowmap-step"><div class="flowmap-node"><div class="flowmap-node-num">07</div><div class="flowmap-node-title">Charlas / tutoriales</div><span class="flowmap-node-badge badge-ok">Continuo</span></div></div>
+      </div>
       <div class="inner-tabs">
         <div class="inner-tab active" data-sec="cad" data-inner="etapas">ETAPAS Y PLAZOS</div>
         <div class="inner-tab" data-sec="cad" data-inner="sistemas">SISTEMAS</div>
@@ -606,7 +806,7 @@
           <div class="sistema-card">
             <div class="sistema-name">Ticketera — osTicket</div>
             <div class="sistema-type">Sistema de tickets · Open source · ticket.joselh.com</div>
-            <div class="sistema-desc">La ticketera es osTicket, el sistema open source de helpdesk más usado del mundo. Recibe los mails de cadentuescuela@bue.edu.ar como tickets. El coordinador los asigna manualmente a los agentes. Actualmente hay 1.038+ tickets abiertos. Último mes: 4.591 abiertos, 2.985 vencidos (65%), 1.457 reabiertos (32%). Tiempo de respuesta promedio: 130 minutos.</div>
+            <div class="sistema-desc">La ticketera es osTicket, el sistema open source de helpdesk más usado del mundo. Recibe los mails de <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6b5b7b2b3b8a2a3b3a5b5a3b3bab796b4a3b3f8b3b2a3f8b7a4">[email&#160;protected]</a> como tickets. El coordinador los asigna manualmente a los agentes. Actualmente hay 1.038+ tickets abiertos. Último mes: 4.591 abiertos, 2.985 vencidos (65%), 1.457 reabiertos (32%). Tiempo de respuesta promedio: 130 minutos.</div>
             <div class="sistema-meta"><span class="sistema-acceso">🔑 API nativa disponible · requiere API key del admin</span></div>
             <div class="sistema-problema">⚠️ La API nativa de osTicket solo permite crear tickets, no modificar existentes. Para asignar agentes o actualizar campos en tickets existentes se necesita instalar un plugin open source de endpoints extendidos (operación de 10 minutos para el admin). El 65% de tickets vencen sin respuesta — la clasificación automática es la intervención de mayor impacto inmediato.</div>
             <span class="sistema-badge sb-api">osTicket · API REST nativa</span>
@@ -865,6 +1065,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   document.querySelectorAll('.back-btn[data-sec]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      showSection(el.dataset.sec);
+    });
+  });
+  document.querySelectorAll('.overview-card[data-sec]').forEach(function(el) {
     el.addEventListener('click', function() {
       showSection(el.dataset.sec);
     });
